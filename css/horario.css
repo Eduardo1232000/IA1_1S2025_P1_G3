@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(120deg, #57C3C8 40%, #0B4249 50%),
+        radial-gradient(circle, #0B4249 10%, transparent 60%);
+    background-blend-mode: screen;
+
+    opacity: 0;                             /* PARA TRANSICION DE ENTRADA */
+    transition: opacity 0.5s ease-in-out;
+}
+body.aparecer {
+    opacity: 1;
+}
+.oculto{
+    opacity: 0;
+    visibility: hidden; /* No ocupa espacio en el flujo */
+    transition: opacity 0.5s ease, visibility 0s 0s; /* Retira visibility sin retardo */
+}
+#CUADRO_GRANDE{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: radial-gradient(circle, transparent 10%, #062243 70%);
+    background-color: #1c3b82;
+    border-radius: 10px;
+    width: 90%; 
+    height: 90vh; 
+    transition: all 0.5s ease; 
+}
+.DESCRIPCION{
+    position: absolute;
+    font-size: 3vh;
+    color: white;
+}
+.BOTON{
+    position: absolute;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-color: transparent;
+    cursor: pointer;
+    transition: 500ms;
+}
+#BOTON_REGRESAR_HOME{
+    top: 3%;
+    left: 1%;
+    width: 15vh;
+    height: 8vh;
+    background-color: #802525;
+}
+#BOTON_REGRESAR_HOME:hover{
+    background-color: #4d0d0d;
+}
+#HORARIO_DIV_PARTE1{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    width: 100%;
+    height: 82%;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: opacity 0.5s ease, visibility 0s 0.3s;
+}
+#HORARIO_DIV_PARTE2{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    width: 100%;
+    height: 82%;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: opacity 0.5s ease, visibility 0s 0.3s;
+}
+#HORARIO_BOTON_SIGUIENTE{
+    top: 90%;
+    left: 90%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #17671d;
+    border-radius: 12px;
+}
+#HORARIO_BOTON_SIGUIENTE:hover{
+    background-color: #07480c;
+}
+#HORARIO_TITULO{
+    position: absolute;
+    width: 20%;
+    left: 38%;
+    top: 2%;
+    font-size: 10vh;
+    font-weight: bold;
+    color: white;
+}
+#HORARIO_LINEA_TITULO{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+}
+#HORARIO_DESCRIPCION1{
+    width: 40%;
+    left: 30%;
+    top: 5%;
+}
+#HORARIO_TEXTO_CURSO{
+    top: 20%;
+    left: 10%;
+    width: 30%;
+    text-align: center;
+
+}
+#HORARIO_TEXTO_SELECCIONADO{
+    top: 20%;
+    left: 60%;
+    width: 30%;
+    text-align: center;
+}
+#HORARIO_LINEA_TEXTO1{
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 30%;
+}
+#HORARIO_LINEA_TEXTO2{
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    width: 30%;
+}
+#HORARIO_DIV_SELECCIONADOS{
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+#HORARIO_DIV_CURSOS{
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+#HORARIO_DIV{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+    height: 75%;
+    background-color: white;
+}
+#HORARIO_BOTON_ACEPTAR{
+    top: 5%;
+    left: 90%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #17671d;
+    border-radius: 12px;
+}
+#HORARIO_BOTON_ACEPTAR:hover{
+    background-color: #07480c;
+}

@@ -1,0 +1,192 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(120deg, #57C3C8 40%, #0B4249 50%),
+        radial-gradient(circle, #0B4249 10%, transparent 60%);
+    background-blend-mode: screen;
+
+    opacity: 0;                             /* PARA TRANSICION DE ENTRADA */
+    transition: opacity 0.5s ease-in-out;
+}
+body.aparecer {
+    opacity: 1;
+}
+.oculto{
+    opacity: 0;
+    visibility: hidden; /* No ocupa espacio en el flujo */
+    transition: opacity 0.5s ease, visibility 0s 0s; /* Retira visibility sin retardo */
+}
+#CUADRO_GRANDE{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: radial-gradient(circle, transparent 10%, #062243 70%);
+    background-color: #1c3b82;
+    border-radius: 10px;
+    width: 90%; 
+    height: 90vh; 
+    transition: all 0.5s ease; 
+}
+.DESCRIPCION{
+    position: absolute;
+    font-size: 3vh;
+    color: white;
+}
+#ESTUDIANTE_DIV_PARTE1{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    width: 100%;
+    height: 82%;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: opacity 0.5s ease, visibility 0s 0.3s;
+}
+#ESTUDIANTE_DIV_PARTE2{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    width: 100%;
+    height: 82%;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: opacity 0.5s ease, visibility 0s 0.3s;
+}
+#ESTUDIANTE_DIV_PARTE3{
+    position: absolute;
+    top: 18%;
+    left: 0%;
+    width: 100%;
+    height: 82%;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: opacity 0.5s ease, visibility 0s 0.3s;
+}
+#ESTUDIANTE_DIV_APTITUDES{
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+#ESTUDIANTE_DIV_HABILIDADES{
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+.BOTON{
+    position: absolute;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-color: transparent;
+    cursor: pointer;
+    transition: 500ms;
+}
+#BOTON_REGRESAR_HOME{
+    top: 3%;
+    left: 1%;
+    width: 15vh;
+    height: 8vh;
+    background-color: #802525;
+}
+#BOTON_REGRESAR_HOME:hover{
+    background-color: #4d0d0d;
+}
+#ESTUDIANTE_BOTON_AGREGAR1{
+    top: 55%;
+    left: 5%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #815d31;
+    border-radius: 12px;
+}
+#ESTUDIANTE_BOTON_AGREGAR1:hover{
+    background-color: #5d3b12;
+}
+#ESTUDIANTE_BOTON_SIGUIENTE{
+    top: 90%;
+    left: 90%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #17671d;
+    border-radius: 12px;
+}
+#ESTUDIANTE_BOTON_SIGUIENTE:hover{
+    background-color: #07480c;
+}
+#ESTUDIANTE_BOTON_ANTERIOR{
+    top: 90%;
+    left: 5%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #672e17;
+    border-radius: 12px;
+}
+#ESTUDIANTE_BOTON_ANTERIOR:hover{
+    background-color: #4d0d0d;
+}
+#ESTUDIANTE_TITULO{
+    position: absolute;
+    width: 20%;
+    left: 38%;
+    top: 2%;
+    font-size: 10vh;
+    font-weight: bold;
+    color: white;
+}
+#ESTUDIANTE_DESCRIPCION1{
+    width: 50%;
+    left: 32%;
+    top: 5%;
+}
+#ESTUDIANTE_TEXTO1{
+    top: 20%;
+    left: 15%;
+    width: 30%;
+    text-align: center;
+
+}
+#ESTUDIANTE_TEXTO2{
+    top: 20%;
+    left: 60%;
+    width: 30%;
+    text-align: center;
+}
+#ESTUDIANTE_LINEA_TITULO{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+}
+#ESTUDIANTE_LINEA_TEXTO1{
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 30%;
+}
+#ESTUDIANTE_LINEA_TEXTO2{
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    width: 30%;
+}
+#ESTUDIANTE_SELECCIONAR_APTITUD{
+    position: absolute;
+    top: 45%;
+    left: 5%;
+    width: 8%;
+    height: 5%;
+}

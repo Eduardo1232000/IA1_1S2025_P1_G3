@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1 - IA</title>
+    <link rel="stylesheet" href="css/analisis_carrera.css">
+</head>
+<body>
+    <div id='CUADRO_GRANDE'>
+        <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('Home_estudiante.html');"> Salir</button>
+        <hr id="ESTUDIANTE_LINEA_TITULO">
+        <label id="ESTUDIANTE_TITULO">Bienvenido</label>
+
+        <div id="ESTUDIANTE_DIV_PARTE1">
+            <button id='ESTUDIANTE_BOTON_AGREGAR1'class="BOTON"onclick='agregar()'> Agregar</button>
+            <button id='ESTUDIANTE_BOTON_SIGUIENTE'class="BOTON"onclick='avanzar_1()'> Siguiente</button>
+            <hr id="ESTUDIANTE_LINEA_TEXTO1">
+            <hr id="ESTUDIANTE_LINEA_TEXTO2">
+
+            <label id="ESTUDIANTE_DESCRIPCION1"class="DESCRIPCION">
+                (1/2) Ingresa los datos solicitados y descubre tu carrera adecuada
+            </label>
+            <label id="ESTUDIANTE_TEXTO1"class="DESCRIPCION">
+                Selecciona las aptitudes en los que considera que tiene un buen desempeño
+            </label>
+            <label id="ESTUDIANTE_TEXTO2"class="DESCRIPCION">
+                Seleccione las habilidades tecnicas que ha desarrollado
+            </label>
+            <select id="ESTUDIANTE_SELECCIONAR_APTITUD">Seleccionar</select>
+            
+            <div id="ESTUDIANTE_DIV_APTITUDES">
+
+            </div>
+            <div id="ESTUDIANTE_DIV_HABILIDADES">
+
+            </div>
+        </div>
+
+        <div id="ESTUDIANTE_DIV_PARTE2"class="oculto">
+            <button id='ESTUDIANTE_BOTON_SIGUIENTE'class="BOTON"onclick="avanzar_2()"> Calcular</button>
+            <button id='ESTUDIANTE_BOTON_ANTERIOR'class="BOTON"onclick="regresar_2()"> Anterior</button>
+            <hr id="ESTUDIANTE_LINEA_TEXTO1">
+            <hr id="ESTUDIANTE_LINEA_TEXTO2">
+            <label id="ESTUDIANTE_DESCRIPCION1"class="DESCRIPCION">
+                (2/2) Ingrese el porcentaje de interes sobre los siguientes temas
+            </label>
+            <label id="ESTUDIANTE_TEXTO1"class="DESCRIPCION">
+                Ingrese el porcentaje de interes sobre los siguientes temas
+            </label>
+            <label id="ESTUDIANTE_TEXTO2"class="DESCRIPCION">
+                Preferencia
+            </label>                
+            <div id="ESTUDIANTE_DIV_APTITUDES">
+
+            </div>
+            <div id="ESTUDIANTE_DIV_HABILIDADES">
+
+            </div>
+        </div>
+        <div id="ESTUDIANTE_DIV_PARTE3"class="oculto">
+            <button id='ESTUDIANTE_BOTON_SIGUIENTE'class="BOTON"onclick="redirigir('Home_estudiante.html');"> Aceptar</button>
+
+            <label id="ESTUDIANTE_DESCRIPCION1"class="DESCRIPCION">
+                Hemos concluido con el analisis, estos son los resultados, elige sabiamente.
+            </label>
+                
+            <div id="ESTUDIANTE_DIV_APTITUDES">
+
+            </div>
+            <div id="ESTUDIANTE_DIV_HABILIDADES">
+
+            </div>
+        </div>
+    </div>
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/analisis_carrera.js"></script> 
+</body>
+</html>
