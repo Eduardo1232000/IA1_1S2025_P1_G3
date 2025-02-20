@@ -109,23 +109,23 @@ body.aparecer {
 #ADMIN_DESCRIPCION1{
     width: 50%;
     left: 32%;
-    top: 5%;
+    top: 0%;
 }
 #ADMIN_TEXTO1{
-    top: 20%;
+    top: 25%;
     left: 5%;
     width: 20%;
     text-align: center;
 
 }
 #ADMIN_TEXTO2{
-    top: 20%;
+    top: 25%;
     left: 32%;
     width: 30%;
     text-align: center;
 }
 #ADMIN_TEXTO3{
-    top: 20%;
+    top: 25%;
     left: 66%;
     width: 30%;
     text-align: center;
@@ -153,4 +153,37 @@ body.aparecer {
     top: 30%;
     left: 66%;
     width: 31%;
+}
+
+#fileInput{
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    color: white;
+    font-size: 2vh;
+}
+#ADMIN_TEXTO_ARCHIVO{
+    position: absolute;
+    top: 9%;
+    left: 25%;
+    color: white;
+    font-size: 3vh;
+}
+#TEXTO_PROLOG{
+    position: absolute;
+    top: 5%;
+    left: 92%;
+    font-size: 4vh;
+    color: white;
+}
+#STATUS_PROLOG{
+    position: absolute;
+    top: 5%;
+    left: 89%;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    font-size: 4vh;
+    border-radius: 100%;
+    color: white;
 }
