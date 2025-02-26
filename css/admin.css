@@ -187,3 +187,56 @@ body.aparecer {
     border-radius: 100%;
     color: white;
 }
+
+
+#ADMIN_DIV_FACULTADES, #ADMIN_DIV_CARRERAS, #ADMIN_DIV_APTITUDES {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow: auto; /* Para que aparezca el scroll */
+    box-sizing: border-box;
+}
+
+#listaFacultades, #listaCarreras, #listaAptitudes {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    max-height: 80%; /* Evita que la lista se desborde */
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+    width: 100%; /* Ajusta los elementos a la caja */
+}
+
+/* Estilos para listas con scroll y tamaño uniforme */
+.lista-scroll {
+    max-height: 150px; /* Altura máxima */
+    overflow-y: auto; /* Barra de desplazamiento */
+    border: 1px solid #ccc; /* Borde */
+    padding: 5px;
+    margin-top: 5px;
+    background: #fff;
+    width: 300px; /* Ajusta el ancho */
+    border-radius: 5px;
+    list-style: none; /* Quita los estilos de lista */
+    text-align: left;
+}
+
+/* Aplicar a las listas de asociaciones */
+#listaAsociacionesFacCarr, #listaAsociacionesCarApt {
+    width: 300px; /* Fija el ancho */
+    margin: 10px auto; /* Centra horizontalmente */
+    display: block;
+}
