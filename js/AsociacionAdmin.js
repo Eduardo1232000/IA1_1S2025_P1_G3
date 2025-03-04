@@ -5,44 +5,23 @@ window.onload = function () {
 function cargarDatosDesdeSessionStorage() {
     let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
     console.log("CODIGO_PROLOG:", CodigoProlog); // Verifica el contenido de CODIGO_PROLOG
-    let lineas = CodigoProlog.split('\n');
-    console.log("Lineas:", lineas); // Verifica si se divide correctamente
-    let facultades = new Set();
-    let carreras = new Set();
-    let aptitudes = new Set();
-    let asociacionesFacCarr = [];
-    let asociacionesCarApt = [];
+    
+    // Cargar las listas desde sessionStorage
+    let facultades = new Set(JSON.parse(sessionStorage.getItem("FACULTAD") || "[]"));
+    let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
+    let aptitudes = new Set(JSON.parse(sessionStorage.getItem("APTITUD") || "[]"));
+    let asociacionesFacCarr = JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]");
+    let asociacionesCarApt = JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]");
 
-    lineas.forEach(linea => {
-        if (linea.startsWith("facultad(")) {
-            facultades.add(extraerDato(linea));
-        } else if (linea.startsWith("carrera(")) {
-            let [facultad, carrera] = extraerDosDatos(linea);
-            carreras.add(carrera);
-            asociacionesFacCarr.push({ facultad, carrera });
-        } else if (linea.startsWith("aptitud(")) {
-            aptitudes.add(extraerDato(linea));
-        } else if (linea.startsWith("carrera_aptitud(")) {
-            let [carrera, aptitud] = extraerDosDatos(linea);
-            asociacionesCarApt.push({ carrera, aptitud });
-        }
-    });
+    // Poblar los select
+    poblarSelect("selectFacultad", [...facultades]);
+    poblarSelect("selectCarrera", [...carreras]);
+    poblarSelect("selectCarreraApt", [...carreras]);
+    poblarSelect("selectAptitud", [...aptitudes]);
 
-    poblarSelect("selectFacultad", facultades);
-    poblarSelect("selectCarrera", carreras);
-    poblarSelect("selectCarreraApt", carreras);
-    poblarSelect("selectAptitud", aptitudes);
+    // Actualizar las listas de asociaciones
     actualizarLista("listaAsociacionesFacCarr", asociacionesFacCarr, "facultad", "carrera");
     actualizarLista("listaAsociacionesCarApt", asociacionesCarApt, "carrera", "aptitud");
-}
-
-function extraerDato(linea) {
-    return linea.match(/\(([^)]+)\)/)[1].trim();
-}
-
-function extraerDosDatos(linea) {
-    let match = linea.match(/\(([^,]+),\s*([^)]+)\)/);
-    return match ? [match[1].trim(), match[2].trim()] : ["", ""];
 }
 
 function poblarSelect(id, elementos) {
@@ -72,8 +51,8 @@ function asociarFacultadCarreraDesdeUI() {
     let facultad = document.getElementById("selectFacultad").value;
     let carrera = document.getElementById("selectCarrera").value;
     if (facultad && carrera) {
-        let nuevaLinea = `\ncarrera(${facultad}, ${carrera}).`;
-        agregarAsociacion(nuevaLinea);
+        let nuevaLinea = { facultad, carrera };
+        agregarAsociacion(nuevaLinea, "FACULTAD_CARRERA");
     }
 }
 
@@ -81,18 +60,28 @@ function asociarCarreraAptitudDesdeUI() {
     let carrera = document.getElementById("selectCarreraApt").value;
     let aptitud = document.getElementById("selectAptitud").value;
     if (carrera && aptitud) {
-        let nuevaLinea = `\ncarrera_aptitud(${carrera}, ${aptitud}).`;
-        agregarAsociacion(nuevaLinea);
+        let nuevaLinea = { carrera, aptitud };
+        agregarAsociacion(nuevaLinea, "CARRERA_APTITUD");
     }
 }
 
-function agregarAsociacion(nuevaLinea) {
-    let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+function agregarAsociacion(nuevaLinea, tipoAsociacion) {
+    let asociaciones = JSON.parse(sessionStorage.getItem(tipoAsociacion) || "[]");
 
-    if (!CodigoProlog.includes(nuevaLinea.trim())) {
-        CodigoProlog += nuevaLinea;
-        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-        cargarDatosDesdeSessionStorage();
+    // Verificar si la asociación ya existe
+    let existe = asociaciones.some(asoc => {
+        if (tipoAsociacion === "FACULTAD_CARRERA") {
+            return asoc.facultad === nuevaLinea.facultad && asoc.carrera === nuevaLinea.carrera;
+        } else if (tipoAsociacion === "CARRERA_APTITUD") {
+            return asoc.carrera === nuevaLinea.carrera && asoc.aptitud === nuevaLinea.aptitud;
+        }
+        return false;
+    });
+
+    if (!existe) {
+        asociaciones.push(nuevaLinea);
+        sessionStorage.setItem(tipoAsociacion, JSON.stringify(asociaciones));
+        cargarDatosDesdeSessionStorage();  // Recargar los datos para actualizar la UI
     } else {
         console.log("La asociación ya existe, no se agregará duplicada.");
     }
