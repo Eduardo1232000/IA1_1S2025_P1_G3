@@ -86,3 +86,7 @@ function agregarAsociacion(nuevaLinea, tipoAsociacion) {
         console.log("La asociación ya existe, no se agregará duplicada.");
     }
 }
+
+function AccionSiguiente() {
+    console.log("Datos guardados en sessionStorage");
+}
