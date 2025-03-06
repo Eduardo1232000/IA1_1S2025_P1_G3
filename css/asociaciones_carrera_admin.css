@@ -45,8 +45,8 @@ body.aparecer {
 /* Títulos */
 #ADMIN_TITULO {
     position: absolute;
-    width: 20%;
-    left: 33%;
+    width: 80%;
+    left: 23%;
     top: 2%;
     font-size: 10vh;
     font-weight: bold;
@@ -56,27 +56,47 @@ body.aparecer {
 /* Sección de Asociación Facultad - Carrera y Asociación Carrera - Aptitud */
 #ADMIN_DIV_ASOC_HORIZONTAL {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     padding: 20px;
 }
 
 /* Sección de Asociación Facultad - Carrera */
-#ADMIN_DIV_ASOC_FAC_CAR {
+
+#ADMIN_DIV_ASOC_CAR_INT {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
-    margin: 10px;
-    padding: 20px;
+    width: 30%;
+    top: 20%;
+    margin-left: 15%;
+    margin-right: 10%;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
-    position: relative;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+#ADMIN_DIV_ASOC_CAR_HAB {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    top: 20%;
+    left: 45%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: absolute;
 }
 
 /* Títulos */
 #ADMIN_TEXTO1, #ADMIN_TEXTO2 {
-    font-size: 2.5vh;
+    font-size: 3.5vh;
     color: black;
     margin-bottom: 20px;
     width: 100%;
@@ -162,7 +182,6 @@ body.aparecer {
 #ADMIN_BOTON_SIGUIENTE:hover{
     background-color: #07480c;
 }
-
 #ADMIN_BOTON_ATRAS{
     top: 90%;
     left: 75%;

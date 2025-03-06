@@ -109,10 +109,8 @@ function actualizarListaDesdeArray(idLista, elementos) {
 
 //   Función para guardar datos en sessionStorage
 function AccionSiguiente() {
-    sessionStorage.setItem("FACULTAD", JSON.stringify(obtenerLista("listaFacultades")));
-    sessionStorage.setItem("CARRERA", JSON.stringify(obtenerLista("listaCarreras")));
-    sessionStorage.setItem("APTITUD", JSON.stringify(obtenerLista("listaAptitudes")));
     console.log("Datos guardados en sessionStorage");
+    //falta toda la logica de esto
 }
 
 //   Funciones para obtener datos de la UI
