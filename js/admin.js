@@ -92,11 +92,11 @@ function procesarCodigoProlog(codigo) {
             let habilidad_unica = linea.match(/habilidad_unica\((.*?)\)/);
             if (habilidad_unica) habilidades_unicas.push(habilidad_unica[1].slice(1, -1));
         } 
-        // Habilidad
+        // Relación carrera-habilidad
         else if (linea.startsWith("habilidad(")) {
-            let habilidad = linea.match(/habilidad\((.*?)\)/);
-            if (habilidad) habilidades.push(habilidad[1].slice(1, -1));
-        } 
+            let relacionCarreraHabilidad = linea.match(/habilidad\((.*?),\s*(.*?)\)/);
+            if (relacionCarreraHabilidad) habilidades.push({ habilidad: relacionCarreraHabilidad[1], carrera: relacionCarreraHabilidad[2] });
+        }
         // Interés único
         else if (linea.startsWith("interes_unico(")) {
             let interes_unico = linea.match(/interes_unico\((.*?)\)/);
@@ -105,7 +105,7 @@ function procesarCodigoProlog(codigo) {
         // Relación carrera-interés
         else if (linea.startsWith("interes(")) {
             let relacionCarreraInteres = linea.match(/interes\((.*?),\s*(.*?)\)/);
-            if (relacionCarreraInteres) intereses.push({ carrera: relacionCarreraInteres[1], interes: relacionCarreraInteres[2] });
+            if (relacionCarreraInteres) intereses.push({ interes: relacionCarreraInteres[1], carrera: relacionCarreraInteres[2] });
         }
         // Preferencia
         else if (linea.startsWith("preferencia(")) {

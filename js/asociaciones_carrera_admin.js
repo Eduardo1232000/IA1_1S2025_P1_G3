@@ -8,14 +8,23 @@ function cargarDatosDesdeSessionStorage() {
     
     // Cargar las listas desde sessionStorage
     let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
+    //interes
     let intereses = new Set(JSON.parse(sessionStorage.getItem("INTERES_UNICO")|| "[]"));
     let asociacionesCARINT = JSON.parse(sessionStorage.getItem("INTERES") || "[]");
-    console.log(intereses)
+
+    // habilidad
+    let habilidades = new Set(JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA")|| "[]"));
+    let asociacionesCARHAB = JSON.parse(sessionStorage.getItem("HABILIDAD") || "[]");
+    console.log(habilidades)
     // Poblar los select
     poblarSelect("selectCarrera", [...carreras]);
     poblarSelect("selectInteres", [...intereses]);
+    poblarSelect("selectCarreraHabilidad", [...carreras]);
+    poblarSelect("selectHabilidad", [...habilidades]);
     // Actualizar las listas de asociaciones
     actualizarLista("listaAsociacionCarreraInteres", asociacionesCARINT, "carrera", "interes");
+
+    actualizarLista("listaAsociacionCarreraHabilidad", asociacionesCARHAB, "carrera", "habilidad");
 }
 
 function poblarSelect(id, elementos) {
@@ -51,16 +60,16 @@ function asociarFacultadCarreraDesdeUI() {
 }
 
 function asociarCarreraHabilidadDesdeUI() {
-    let carrera = document.getElementById("selectCarreraHab").value;
-    let habilidad = document.getElementById("selectFacultadHab").value;
+    let carrera = document.getElementById("selectCarreraHabilidad").value;
+    let habilidad = document.getElementById("selectHabilidad").value;
     if (carrera && habilidad) {
         let nuevaLinea = { carrera, habilidad };
-        agregarAsociacion(nuevaLinea, "CARRERA_HABILIDAD");
+        agregarAsociacion(nuevaLinea, "HABILIDAD");
     }
 }
 
 function asociarCarreraSeccionDesdeUI() {
-    let carrera = document.getElementById("selectCarreraSec").value;
+    let carrera = document.getElementById("selectCarrera").value;
     let seccion = document.getElementById("selectFacultadSec").value;
     if (carrera && seccion) {
         let nuevaLinea = { carrera, seccion };

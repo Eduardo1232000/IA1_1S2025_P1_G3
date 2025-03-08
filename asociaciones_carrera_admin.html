@@ -43,14 +43,12 @@
                 <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Carrera con Interes</label>
                 <!-- Select para Facultad y Carrera -->
                 <div class="input-container">
-                    <select id="selectInteres">
-                        <option value="">Seleccione un Interes</option>
-                    </select>
-                    
                     <select id="selectCarrera">
                         <option value="">Seleccione una Carrera</option>
                     </select>
-                    
+                    <select id="selectInteres">
+                        <option value="">Seleccione un Interes</option>
+                    </select>
                 </div>
 
                 <!-- Botón de Asociación -->
@@ -65,23 +63,19 @@
             <!-- Carreras con habilidades -->
             <div id="ADMIN_DIV_ASOC_CAR_HAB">
                 <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Carrera con Habilidad</label>
-                <!-- Select para Facultad y Carrera -->
                 <div class="input-container">
-                    <select id="selectFacultad">
+                    <!-- Cambié el id de "selectCarrera" a "selectCarreraHabilidad" -->
+                    <select id="selectCarreraHabilidad">
                         <option value="">Seleccione una Carrera</option>
                     </select>
-                    <select id="selectCarrera">
+                    <select id="selectHabilidad">
                         <option value="">Seleccione una Habilidad</option>
                     </select>
                 </div>
-
-                <!-- Botón de Asociación -->
                 <div class="input-container">
-                    <button class="BOTON_ASOCIAR" onclick="asociarFacultadCarreraDesdeUI()">Asociar</button>
+                    <button class="BOTON_ASOCIAR" onclick="asociarCarreraHabilidadDesdeUI()">Asociar</button>
                 </div>
-
-                <!-- Lista de Asociaciones -->
-                <ul id="listaAsociacionCarreraInteres" class="lista-scroll"></ul>
+                <ul id="listaAsociacionCarreraHabilidad" class="lista-scroll"></ul>
             </div>
 
             <!-- Carreras con secciones -->
