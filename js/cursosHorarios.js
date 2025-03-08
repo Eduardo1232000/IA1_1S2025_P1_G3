@@ -9,7 +9,6 @@ function cargarDatosDesdeSessionStorage() {
     let horasFin = new Set(JSON.parse(sessionStorage.getItem("HORA") || "[]"));
     let secciones = new Set(JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]"));
     let asociacionesCursosHorarios = JSON.parse(sessionStorage.getItem("HORARIO") || "[]"); // Cambio aquí
-    console.log(sessionStorage.getItem("HORARIO"));
 
     // Poblar los select
     poblarSelect("selectDia", [...dias]);
@@ -40,7 +39,6 @@ function actualizarLista(idLista, asociaciones) {
     lista.innerHTML = "";
     asociaciones.forEach(asoc => {
         let item = document.createElement("li");
-        console.log(asoc)
         item.textContent = `${asoc.dia} , ${asoc.hora_inicio}, ${asoc.hora_fin} , ${asoc.seccion} , ${asoc.curso}`;
         lista.appendChild(item);
     });
@@ -49,13 +47,14 @@ function actualizarLista(idLista, asociaciones) {
 function asociarFacultadCarreraDesdeUI() {
     let dia = document.getElementById("selectDia").value;
     let curso = document.getElementById("selectCurso").value;
-    let horaInicio = document.getElementById("selectHoraI").value;
-    let horaFin = document.getElementById("selectHoraF").value;
+    let hora_inicio = document.getElementById("selectHoraI").value;
+    let hora_fin = document.getElementById("selectHoraF").value;
     let seccion = document.getElementById("selectSeccion").value;
-    
-    if (dia && curso && horaInicio && horaFin && seccion) {
-        let nuevaLinea = { dia, curso, horaInicio, horaFin, seccion };
-        agregarAsociacion(nuevaLinea, "HORARIO");  // Cambio aquí
+    if (dia && curso && hora_inicio && hora_fin && seccion) {
+        let nuevaLinea = { dia, curso, hora_inicio, hora_fin, seccion };
+        agregarAsociacion(nuevaLinea, "HORARIO");
+    } else {
+        console.log("Faltan datos para hacer la asociación.");
     }
 }
 

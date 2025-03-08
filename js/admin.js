@@ -13,10 +13,8 @@ function validar_codigo_prolog() {
     try {
         CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG");
         if (!CodigoProlog) {
-            console.log("No hay código almacenado o está vacío.");
             return;
         }
-        console.log("HAY CÓDIGO ALMACENADO:", CodigoProlog);
         document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
         procesarCodigoProlog(CodigoProlog);  //   Procesa los datos después de cargarlos
     } catch (error) {
@@ -32,13 +30,10 @@ document.getElementById('fileInput').addEventListener('change', function (event)
     reader.onload = function (e) {
         CodigoProlog = e.target.result;
         session = pl.create(1000);
-        console.log(CodigoProlog)
         session.consult(CodigoProlog, {
             success: function () {
-                console.log("ÉXITO AL CARGAR");
                 document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
                 sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-                console.log("CODIGO_PROLOG guardado en sessionStorage:", CodigoProlog);
                 procesarCodigoProlog(CodigoProlog); //   Procesar datos después de cargarlos
             },
             error: function (err) {
@@ -131,7 +126,7 @@ function procesarCodigoProlog(codigo) {
         // Relación carrera-aptitud
         else if (linea.startsWith("aptitud(")) {
             let relacionCarreraAptitud = linea.match(/aptitud\((.*?),\s*(.*?)\)/);
-            if (relacionCarreraAptitud) carreraAptitud.push({ carrera: relacionCarreraAptitud[1], aptitud: relacionCarreraAptitud[2] });
+            if (relacionCarreraAptitud) carreraAptitud.push({ aptitud: relacionCarreraAptitud[1], carrera: relacionCarreraAptitud[2] });
         }
         // Relacion del horario
         else if (linea.startsWith("horario(")) {
@@ -143,9 +138,7 @@ function procesarCodigoProlog(codigo) {
                 let hora_fin = relacionHorarios[3].replace(/'/g, '').trim();  // Eliminar comillas
                 let seccion = relacionHorarios[4].replace(/'/g, '').trim();  // Eliminar comillas
                 let curso = relacionHorarios[5].replace(/'/g, '').trim();  // Eliminar comillas
-                
                 horarios.push({ dia, hora_inicio, hora_fin, seccion, curso });
-                console.log(horarios);
             }
         }
     });
@@ -662,16 +655,16 @@ function asociarHorarioDesdeUI() {
     const selectSeccion = document.getElementById("selectSeccion");
 
     const curso = selectCurso.value.trim();
-    const horaInicio = selectHoraI.value.trim();
-    const horaFin = selectHoraF.value.trim();
+    const hora_inicio = selectHoraI.value.trim();
+    const hora_fin = selectHoraF.value.trim();
     const seccion = selectSeccion.value.trim();
 
-    if (curso && horaInicio && horaFin && seccion) {
+    if (curso && hora_inicio && hora_fin && seccion) {
         let listaHorarios = document.getElementById("listaHorarios");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
-        item.textContent = `${curso} - ${horaInicio} a ${horaFin} - Sección: ${seccion}`;
+        item.textContent = `${curso} - ${hora_inicio} a ${hora_fin} - Sección: ${seccion}`;
 
         // Crear botón de eliminar
         let btnEliminar = document.createElement("button");
@@ -679,7 +672,7 @@ function asociarHorarioDesdeUI() {
         btnEliminar.onclick = function () {
             listaHorarios.removeChild(item);
             // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar("horario", `${curso}, ${horaInicio}, ${horaFin}, ${seccion}`);
+            actualizarPrologDespuésDeEliminar("horario", `${curso}, ${hora_inicio}, ${hora_fin}, ${seccion}`);
         };
 
         item.appendChild(btnEliminar);
@@ -693,12 +686,12 @@ function asociarHorarioDesdeUI() {
 
         // Guardar en sessionStorage
         let horarios = JSON.parse(sessionStorage.getItem("HORARIO") || "[]");
-        horarios.push({ curso, hora_inicio: horaInicio, hora_fin: horaFin, seccion });
+        horarios.push({ curso, hora_inicio: hora_inicio, hora_fin: hora_fin, seccion });
         sessionStorage.setItem("HORARIO", JSON.stringify(horarios));
 
         // Actualizar el código Prolog
         let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-        CodigoProlog += `\nhorario("${curso}", "${horaInicio}", "${horaFin}", "${seccion}").`;
+        CodigoProlog += `\nhorario("${curso}", "${hora_inicio}", "${hora_fin}", "${seccion}").`;
         sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
     } else {
         alert("Por favor, ingresa todos los datos para asociar un horario.");
