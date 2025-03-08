@@ -56,20 +56,20 @@ function procesarCodigoProlog(codigo) {
     let lineas = codigo.split("\n");
     lineas.forEach(linea => {
         linea = linea.trim();
-        if (linea.startsWith("facultad(")) {
-            let facultad = linea.match(/facultad\((.*?)\)/);
+        if (linea.startsWith("facultad_unico(")) {
+            let facultad = linea.match(/facultad_unico\((.*?)\)/);
             if (facultad) facultades.push(facultad[1].slice(1, -1));
         } else if (linea.startsWith("carrera(")) {
             let carrera = linea.match(/carrera\((.*?)\)/);
             if (carrera) carreras.push(carrera[1].slice(1, -1));
-        } else if (linea.startsWith("aptitud(")) {
-            let aptitud = linea.match(/aptitud\((.*?)\)/);
+        } else if (linea.startsWith("aptitud_unico(")) {
+            let aptitud = linea.match(/aptitud_unico\((.*?)\)/);
             if (aptitud) aptitudes.push(aptitud[1].slice(1, -1));
-        } else if (linea.startsWith("facultad_carrera(")) {
-            let relacionFacultadCarrera = linea.match(/facultad_carrera\((.*?),\s*(.*?)\)/);
+        } else if (linea.startsWith("facultad(")) {
+            let relacionFacultadCarrera = linea.match(/facultad\((.*?),\s*(.*?)\)/);
             if (relacionFacultadCarrera) facultadCarrera.push({ facultad: relacionFacultadCarrera[1], carrera: relacionFacultadCarrera[2] });
-        } else if (linea.startsWith("carrera_aptitud(")) {
-            let relacionCarreraAptitud = linea.match(/carrera_aptitud\((.*?),\s*(.*?)\)/);
+        } else if (linea.startsWith("aptitud(")) {
+            let relacionCarreraAptitud = linea.match(/aptitud\((.*?),\s*(.*?)\)/);
             if (relacionCarreraAptitud) carreraAptitud.push({ carrera: relacionCarreraAptitud[1], aptitud: relacionCarreraAptitud[2] });
         }
     });
