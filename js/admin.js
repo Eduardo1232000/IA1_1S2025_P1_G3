@@ -28,11 +28,11 @@ function validar_codigo_prolog() {
 document.getElementById('fileInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (!file) return;
-    
     const reader = new FileReader();
     reader.onload = function (e) {
         CodigoProlog = e.target.result;
         session = pl.create(1000);
+        console.log(CodigoProlog)
         session.consult(CodigoProlog, {
             success: function () {
                 console.log("ÉXITO AL CARGAR");

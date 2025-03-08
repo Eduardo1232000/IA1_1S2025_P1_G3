@@ -44,10 +44,10 @@
                 <!-- Select para Facultad y Carrera -->
                 <div class="input-container">
                     <select id="selectFacultad">
-                        <option value="">Seleccione una carrera</option>
+                        <option value="">Seleccione una Carrera</option>
                     </select>
                     <select id="selectCarrera">
-                        <option value="">Seleccione un interes</option>
+                        <option value="">Seleccione un Interes</option>
                     </select>
                 </div>
 
@@ -66,10 +66,32 @@
                 <!-- Select para Facultad y Carrera -->
                 <div class="input-container">
                     <select id="selectFacultad">
-                        <option value="">Seleccione una carrera</option>
+                        <option value="">Seleccione una Carrera</option>
                     </select>
                     <select id="selectCarrera">
-                        <option value="">Seleccione una habilidad</option>
+                        <option value="">Seleccione una Habilidad</option>
+                    </select>
+                </div>
+
+                <!-- Botón de Asociación -->
+                <div class="input-container">
+                    <button class="BOTON_ASOCIAR" onclick="asociarFacultadCarreraDesdeUI()">Asociar</button>
+                </div>
+
+                <!-- Lista de Asociaciones -->
+                <ul id="listaAsociacionesFacCarr" class="lista-scroll"></ul>
+            </div>
+
+            <!-- Carreras con secciones -->
+            <div id="ADMIN_DIV_ASOC_CAR_SEC">
+                <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Carrera con Sección</label>
+                <!-- Select para Facultad y Carrera -->
+                <div class="input-container">
+                    <select id="select_car">
+                        <option value="">Seleccione una Carrera</option>
+                    </select>
+                    <select id="select_sec">
+                        <option value="">Seleccione una Sección</option>
                     </select>
                 </div>
 

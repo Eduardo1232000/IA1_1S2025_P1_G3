@@ -69,7 +69,7 @@ body.aparecer {
     align-items: center;
     width: 30%;
     top: 20%;
-    margin-left: 15%;
+    margin-left: 2%;
     margin-right: 10%;
     padding: 10px;
     background-color: white;
@@ -84,7 +84,23 @@ body.aparecer {
     align-items: center;
     width: 30%;
     top: 20%;
-    left: 45%;
+    left: 25%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+#ADMIN_DIV_ASOC_CAR_SEC {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    top: 20%;
+    left: 58%;
     margin-left: 10%;
     margin-right: 10%;
     padding: 10px;

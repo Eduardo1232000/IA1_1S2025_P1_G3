@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto1 - IA</title>
     <script src="js/tau-prolog.js"></script>
-    <link rel="stylesheet" href="css/gestion_habilidades_interes_admin.css">
+    <link rel="stylesheet" href="css/seccion_horario.css">
     <style>
         /* Ajuste para listas con scroll */
         .lista-scroll {
@@ -33,18 +33,18 @@
     <div id='CUADRO_GRANDE_ADMIN'>
         <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('index.html');"> Salir</button>
         <hr id="ADMIN_LINEA_TITULO">
-        <label id="ADMIN_TITULO">Habilidades - Interes</label>
+        <label id="ADMIN_TITULO">Secciones y Horas</label>
         <div id="ADMIN_DIV">
-            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('seccion_horario.html');"> Siguiente</button>
-            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('Admin.html');"> Regresar</button>
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('asociacion_admin.html');"> Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('Gestion_habilidades_intereses_admin.html');"> Regresar</button>
             <hr id="ADMIN_LINEA_TEXTO1">
             <hr id="ADMIN_LINEA_TEXTO2">
 
             <!-- Habilidades -->
-            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Habilidades</label>
+            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Seccion</label>
             <div id="ADMIN_DIV_FACULTADES">
                 <div class="input-container">
-                    <input type="text" id="inputFacultad" placeholder="Nombre de la Habilidad">
+                    <input type="text" id="inputFacultad" placeholder="Nombre de la sección">
                     <button onclick="agregarHabilidadDesdeUI()">Agregar</button>
                     <!-- <button onclick="agregarFacultadDesdeUI()">Agregar</button> -->
                 </div>
@@ -52,10 +52,10 @@
             </div>
 
             <!-- Intereses -->
-            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Intereses</label>
+            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Hora</label>
             <div id="ADMIN_DIV_CARRERAS">
                 <div class="input-container">
-                    <input type="text" id="inputCarrera" placeholder="Nombre del Interes">
+                    <input type="text" id="inputCarrera" placeholder="Hora">
                     <button onclick="agregarAptitudDesdeUI()">Agregar</button>
                     <!-- <button onclick="agregarCarreraDesdeUI()">Agregar</button> -->
                 </div>
