@@ -1,261 +1,97 @@
-let session = pl.create(1000);
-let CodigoProlog = "";
-
 window.onload = function () {
-    validar_codigo_prolog();
-    if (sessionStorage.getItem("CODIGO_PROLOG")) {
-        cargarDatosDesdeSessionStorage();
-    }
+    cargarDatosDesdeSessionStorage();
 };
 
-//   Función para validar y mostrar el código Prolog
-function validar_codigo_prolog() {
-    try {
-        CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG");
-        if (!CodigoProlog) {
-            console.log("No hay código almacenado o está vacío.");
-            return;
-        }
-        console.log("HAY CÓDIGO ALMACENADO:", CodigoProlog);
-        document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
-        procesarCodigoProlog(CodigoProlog);  //   Procesa los datos después de cargarlos
-    } catch (error) {
-        console.log("ERROR AL OBTENER CÓDIGO PROLOG", error);
-    }
-}
-
-//   Función para cargar archivo Prolog
-document.getElementById('fileInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    if (!file) return;
+function cargarDatosDesdeSessionStorage() {
+    let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+    console.log("CODIGO_PROLOG:", CodigoProlog); // Verifica el contenido de CODIGO_PROLOG
     
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        CodigoProlog = e.target.result;
-        session = pl.create(1000);
-        session.consult(CodigoProlog, {
-            success: function () {
-                console.log("ÉXITO AL CARGAR");
-                document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
-                sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-                console.log("CODIGO_PROLOG guardado en sessionStorage:", CodigoProlog);
-                procesarCodigoProlog(CodigoProlog); //   Procesar datos después de cargarlos
-            },
-            error: function (err) {
-                console.log("Error al cargar el código: " + err);
-            }
-        });
-    };
-    reader.readAsText(file);
-});
-
-//   Función para procesar Código Prolog y extraer datos
-function procesarCodigoProlog(codigo) {
-    let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [];
-
-    let lineas = codigo.split("\n");
-    lineas.forEach(linea => {
-        linea = linea.trim();
-        if (linea.startsWith("facultad(")) {
-            let facultad = linea.match(/facultad\((.*?)\)/);
-            if (facultad) facultades.push(facultad[1].slice(1, -1));
-        } else if (linea.startsWith("carrera(")) {
-            let carrera = linea.match(/carrera\((.*?)\)/);
-            if (carrera) carreras.push(carrera[1].slice(1, -1));
-        } else if (linea.startsWith("aptitud(")) {
-            let aptitud = linea.match(/aptitud\((.*?)\)/);
-            if (aptitud) aptitudes.push(aptitud[1].slice(1, -1));
-        } else if (linea.startsWith("facultad_carrera(")) {
-            let relacionFacultadCarrera = linea.match(/facultad_carrera\((.*?),\s*(.*?)\)/);
-            if (relacionFacultadCarrera) facultadCarrera.push({ facultad: relacionFacultadCarrera[1], carrera: relacionFacultadCarrera[2] });
-        } else if (linea.startsWith("carrera_aptitud(")) {
-            let relacionCarreraAptitud = linea.match(/carrera_aptitud\((.*?),\s*(.*?)\)/);
-            if (relacionCarreraAptitud) carreraAptitud.push({ carrera: relacionCarreraAptitud[1], aptitud: relacionCarreraAptitud[2] });
-        }
-    });
-
-    //   Guardar en sessionStorage
-    sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
-    sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
-    sessionStorage.setItem("APTITUD", JSON.stringify(aptitudes));
-    sessionStorage.setItem("FACULTAD_CARRERA", JSON.stringify(facultadCarrera));
-    sessionStorage.setItem("CARRERA_APTITUD", JSON.stringify(carreraAptitud));
-
-    //   Actualizar la UI
-    actualizarListaDesdeArray("listaFacultades", facultades);
-    actualizarListaDesdeArray("listaCarreras", carreras);
-    actualizarListaDesdeArray("listaAptitudes", aptitudes);
+    // Cargar las listas desde sessionStorage
+    let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
+    let intereses = new Set(JSON.parse(sessionStorage.getItem("INTERES_UNICO")|| "[]"));
+    let asociacionesCARINT = JSON.parse(sessionStorage.getItem("INTERES") || "[]");
+    console.log(intereses)
+    // Poblar los select
+    poblarSelect("selectCarrera", [...carreras]);
+    poblarSelect("selectInteres", [...intereses]);
+    // Actualizar las listas de asociaciones
+    actualizarLista("listaAsociacionCarreraInteres", asociacionesCARINT, "carrera", "interes");
 }
 
-//   Función para actualizar listas en la UI
-function actualizarListaDesdeArray(idLista, elementos) {
-    let lista = document.getElementById(idLista);
-    lista.innerHTML = ""; // Limpiar lista antes de agregar nuevos elementos
+function poblarSelect(id, elementos) {
+    let select = document.getElementById(id);
+    if (!select) return;
+    select.innerHTML = "";
+    elementos.forEach(el => {
+        let option = document.createElement("option");
+        option.value = el;
+        option.textContent = el;
+        select.appendChild(option);
+    });
+}
 
-    elementos.forEach(texto => {
+function actualizarLista(idLista, asociaciones, clave1, clave2) {
+    let lista = document.getElementById(idLista);
+    if (!lista) return;
+    lista.innerHTML = "";
+    asociaciones.forEach(asoc => {
         let item = document.createElement("li");
-        item.textContent = texto;
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            lista.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar(idLista.replace('lista', '').toLowerCase(), texto);
-        };
-        item.appendChild(btnEliminar);
+        item.textContent = `${asoc[clave1]} - ${asoc[clave2]}`;
         lista.appendChild(item);
     });
 }
 
-//   Función para guardar datos en sessionStorage
+function asociarFacultadCarreraDesdeUI() {
+    let carrera = document.getElementById("selectCarrera").value;
+    let interes = document.getElementById("selectInteres").value;
+    if (carrera && interes) {
+        let nuevaLinea = { carrera, interes };
+        agregarAsociacion(nuevaLinea, "INTERES");
+    }
+}
+
+function asociarCarreraHabilidadDesdeUI() {
+    let carrera = document.getElementById("selectCarreraHab").value;
+    let habilidad = document.getElementById("selectFacultadHab").value;
+    if (carrera && habilidad) {
+        let nuevaLinea = { carrera, habilidad };
+        agregarAsociacion(nuevaLinea, "CARRERA_HABILIDAD");
+    }
+}
+
+function asociarCarreraSeccionDesdeUI() {
+    let carrera = document.getElementById("selectCarreraSec").value;
+    let seccion = document.getElementById("selectFacultadSec").value;
+    if (carrera && seccion) {
+        let nuevaLinea = { carrera, seccion };
+        agregarAsociacion(nuevaLinea, "CARRERA_SECCION");
+    }
+}
+
+function agregarAsociacion(nuevaLinea, tipoAsociacion) {
+    let asociaciones = JSON.parse(sessionStorage.getItem(tipoAsociacion) || "[]");
+
+    // Verificar si la asociación ya existe
+    let existe = asociaciones.some(asoc => {
+        if (tipoAsociacion === "FACULTAD_CARRERA") {
+            return asoc.facultad === nuevaLinea.facultad && asoc.carrera === nuevaLinea.carrera;
+        } else if (tipoAsociacion === "CARRERA_HABILIDAD") {
+            return asoc.carrera === nuevaLinea.carrera && asoc.habilidad === nuevaLinea.habilidad;
+        } else if (tipoAsociacion === "CARRERA_SECCION") {
+            return asoc.carrera === nuevaLinea.carrera && asoc.seccion === nuevaLinea.seccion;
+        }
+        return false;
+    });
+
+    if (!existe) {
+        asociaciones.push(nuevaLinea);
+        sessionStorage.setItem(tipoAsociacion, JSON.stringify(asociaciones));
+        cargarDatosDesdeSessionStorage();  // Recargar los datos para actualizar la UI
+    } else {
+        console.log("La asociación ya existe, no se agregará duplicada.");
+    }
+}
+
 function AccionSiguiente() {
     console.log("Datos guardados en sessionStorage");
-    //falta toda la logica de esto
 }
-
-//   Funciones para obtener datos de la UI
-function obtenerLista(idLista) {
-    return [...document.getElementById(idLista).children].map(li => li.textContent.replace("❌", "").trim());
-}
-
-// Función para agregar una Facultad desde la interfaz de usuario
-function agregarFacultadDesdeUI() {
-    const inputFacultad = document.getElementById("inputFacultad");
-    const facultad = inputFacultad.value.trim();
-
-    if (facultad) {
-        // Verificar si ya existe
-        let facultades = JSON.parse(sessionStorage.getItem("FACULTAD") || "[]");
-        if (!facultades.includes(facultad)) {
-            let listaFacultades = document.getElementById("listaFacultades");
-
-            // Crear un nuevo elemento de lista
-            let item = document.createElement("li");
-            item.textContent = facultad;
-
-            // Crear botón de eliminar
-            let btnEliminar = document.createElement("button");
-            btnEliminar.textContent = "❌";
-            btnEliminar.onclick = function () {
-                listaFacultades.removeChild(item);
-                // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-                actualizarPrologDespuésDeEliminar("facultad", facultad);
-            };
-
-            item.appendChild(btnEliminar);
-            listaFacultades.appendChild(item);
-
-            // Limpiar el campo de entrada
-            inputFacultad.value = "";
-
-            // Guardar en sessionStorage
-            facultades.push(facultad);
-            sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
-
-            // Actualizar CODIGO_PROLOG
-            let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-            CodigoProlog += `\nfacultad("${facultad}").`;
-            sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-        } else {
-            alert("La facultad ya existe.");
-        }
-    } else {
-        alert("Por favor, ingresa un nombre de facultad.");
-    }
-}
-
-
-// Función para agregar una Carrera desde la interfaz de usuario
-function agregarCarreraDesdeUI() {
-    const inputCarrera = document.getElementById("inputCarrera");
-    const carrera = inputCarrera.value.trim();
-
-    if (carrera) {
-        let listaCarreras = document.getElementById("listaCarreras");
-
-        // Crear un nuevo elemento de lista
-        let item = document.createElement("li");
-        item.textContent = carrera;
-
-        // Crear botón de eliminar
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            listaCarreras.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar("carrera", carrera);
-        };
-
-        item.appendChild(btnEliminar);
-        listaCarreras.appendChild(item);
-
-        // Limpiar el campo de entrada
-        inputCarrera.value = "";
-
-        // Guardar en sessionStorage
-        let carreras = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
-        carreras.push(carrera);
-        sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
-
-        // Actualizar CODIGO_PROLOG
-        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-        CodigoProlog += `\ncarrera("${carrera}").`;
-        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-    } else {
-        alert("Por favor, ingresa un nombre de carrera.");
-    }
-}
-
-function escapeRegExp(str) {
-    return str.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, "\\$&");  // Escapa caracteres especiales
-}
-
-// Función para eliminar un item de CODIGO_PROLOG después de la eliminación
-function actualizarPrologDespuésDeEliminar(tipo, valor) {
-    let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-    
-    // Asegúrate de que el valor tiene comillas y esté en el formato correcto
-    valor = valor.trim();  // Eliminar espacios adicionales
-    
-    // Escapar el valor antes de pasarlo a la expresión regular
-    const valorEscapado = escapeRegExp(valor);
-    
-    // Crear la expresión regular para eliminar la línea de Prolog
-    const regex = new RegExp(`${tipo}\\("${valorEscapado}"\\)\\.`);
-    
-    // Eliminar la línea del código Prolog
-    CodigoProlog = CodigoProlog.replace(regex, "");
-    
-    // Guardar el nuevo Código Prolog actualizado
-    sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-    
-    // También actualizar sessionStorage para las listas
-    let lista = JSON.parse(sessionStorage.getItem(tipo.toUpperCase()) || "[]");
-    lista = lista.filter(item => item !== valor); // Eliminar el valor de la lista
-    sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista)); // Guardar de nuevo la lista actualizada
-}
-
-//   Función para actualizar las listas en la UI desde un array
-function actualizarListaDesdeArray(idLista, elementos) {
-    let lista = document.getElementById(idLista);
-    lista.innerHTML = ""; // Limpiar lista antes de agregar nuevos elementos
-
-    elementos.forEach(texto => {
-        let item = document.createElement("li");
-        item.textContent = texto;
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            lista.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar('facultad', texto);
-            actualizarPrologDespuésDeEliminar('carrera', texto);
-            actualizarPrologDespuésDeEliminar('aptitud', texto);
-
-        };
-        item.appendChild(btnEliminar);
-        lista.appendChild(item);
-    });
-}
-
-

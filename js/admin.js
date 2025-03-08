@@ -102,11 +102,11 @@ function procesarCodigoProlog(codigo) {
             let interes_unico = linea.match(/interes_unico\((.*?)\)/);
             if (interes_unico) intereses_unicos.push(interes_unico[1].slice(1, -1));
         } 
-        // Interés
+        // Relación carrera-interés
         else if (linea.startsWith("interes(")) {
-            let interes = linea.match(/interes\((.*?)\)/);
-            if (interes) intereses.push(interes[1].slice(1, -1));
-        } 
+            let relacionCarreraInteres = linea.match(/interes\((.*?),\s*(.*?)\)/);
+            if (relacionCarreraInteres) intereses.push({ carrera: relacionCarreraInteres[1], interes: relacionCarreraInteres[2] });
+        }
         // Preferencia
         else if (linea.startsWith("preferencia(")) {
             let preferencia = linea.match(/preferencia\((.*?)\)/);
