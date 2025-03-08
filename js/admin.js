@@ -51,40 +51,113 @@ document.getElementById('fileInput').addEventListener('change', function (event)
 
 //   Función para procesar Código Prolog y extraer datos
 function procesarCodigoProlog(codigo) {
-    let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [];
-
+    let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [], curso_unico_ = [], dias = [];
+    let horas = [], habilidades_unicas = [], habilidades = [], intereses_unicos = [], intereses = [], preferencias = [], secciones_unicos = [];
     let lineas = codigo.split("\n");
+    
     lineas.forEach(linea => {
         linea = linea.trim();
+        // Facultad única
         if (linea.startsWith("facultad_unico(")) {
             let facultad = linea.match(/facultad_unico\((.*?)\)/);
             if (facultad) facultades.push(facultad[1].slice(1, -1));
-        } else if (linea.startsWith("carrera(")) {
+        } 
+        // Carrera
+        else if (linea.startsWith("carrera(")) {
             let carrera = linea.match(/carrera\((.*?)\)/);
             if (carrera) carreras.push(carrera[1].slice(1, -1));
-        } else if (linea.startsWith("aptitud_unico(")) {
+        } 
+        // Aptitud única
+        else if (linea.startsWith("aptitud_unico(")) {
             let aptitud = linea.match(/aptitud_unico\((.*?)\)/);
             if (aptitud) aptitudes.push(aptitud[1].slice(1, -1));
-        } else if (linea.startsWith("facultad(")) {
+        } 
+        // Curso único
+        else if (linea.startsWith("curso_unico(")) {
+            let curso_unico = linea.match(/curso_unico\((.*?)\)/);
+            if (curso_unico) curso_unico_.push(curso_unico[1].slice(1, -1));
+        } 
+        // Día
+        else if (linea.startsWith("dia(")) {
+            let dia = linea.match(/dia\((.*?)\)/);
+            if (dia) dias.push(dia[1].slice(1, -1));
+        } 
+        // Hora
+        else if (linea.startsWith("hora(")) {
+            let hora = linea.match(/hora\((.*?)\)/);
+            if (hora) horas.push(hora[1].slice(1, -1));
+        } 
+        // Habilidad única
+        else if (linea.startsWith("habilidad_unica(")) {
+            let habilidad_unica = linea.match(/habilidad_unica\((.*?)\)/);
+            if (habilidad_unica) habilidades_unicas.push(habilidad_unica[1].slice(1, -1));
+        } 
+        // Habilidad
+        else if (linea.startsWith("habilidad(")) {
+            let habilidad = linea.match(/habilidad\((.*?)\)/);
+            if (habilidad) habilidades.push(habilidad[1].slice(1, -1));
+        } 
+        // Interés único
+        else if (linea.startsWith("interes_unico(")) {
+            let interes_unico = linea.match(/interes_unico\((.*?)\)/);
+            if (interes_unico) intereses_unicos.push(interes_unico[1].slice(1, -1));
+        } 
+        // Interés
+        else if (linea.startsWith("interes(")) {
+            let interes = linea.match(/interes\((.*?)\)/);
+            if (interes) intereses.push(interes[1].slice(1, -1));
+        } 
+        // Preferencia
+        else if (linea.startsWith("preferencia(")) {
+            let preferencia = linea.match(/preferencia\((.*?)\)/);
+            if (preferencia) preferencias.push(preferencia[1].slice(1, -1));
+        } 
+        // Sección única
+        else if (linea.startsWith("seccion_unico(")) {
+            let seccion_unico = linea.match(/seccion_unico\((.*?)\)/);
+            if (seccion_unico) secciones_unicos.push(seccion_unico[1].slice(1, -1));
+        } 
+        // Relación facultad-carrera
+        else if (linea.startsWith("facultad(")) {
             let relacionFacultadCarrera = linea.match(/facultad\((.*?),\s*(.*?)\)/);
             if (relacionFacultadCarrera) facultadCarrera.push({ facultad: relacionFacultadCarrera[1], carrera: relacionFacultadCarrera[2] });
-        } else if (linea.startsWith("aptitud(")) {
+        } 
+        // Relación carrera-aptitud
+        else if (linea.startsWith("aptitud(")) {
             let relacionCarreraAptitud = linea.match(/aptitud\((.*?),\s*(.*?)\)/);
             if (relacionCarreraAptitud) carreraAptitud.push({ carrera: relacionCarreraAptitud[1], aptitud: relacionCarreraAptitud[2] });
         }
     });
 
-    //   Guardar en sessionStorage
+    // Guardar en sessionStorage
     sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
     sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
     sessionStorage.setItem("APTITUD", JSON.stringify(aptitudes));
     sessionStorage.setItem("FACULTAD_CARRERA", JSON.stringify(facultadCarrera));
     sessionStorage.setItem("CARRERA_APTITUD", JSON.stringify(carreraAptitud));
+    sessionStorage.setItem("CURSO_UNICO", JSON.stringify(curso_unico_));
+    sessionStorage.setItem("DIA", JSON.stringify(dias));
+    sessionStorage.setItem("HORA", JSON.stringify(horas));
+    sessionStorage.setItem("HABILIDAD_UNICA", JSON.stringify(habilidades_unicas));
+    sessionStorage.setItem("HABILIDAD", JSON.stringify(habilidades));
+    sessionStorage.setItem("INTERES_UNICO", JSON.stringify(intereses_unicos));
+    sessionStorage.setItem("INTERES", JSON.stringify(intereses));
+    sessionStorage.setItem("PREFERENCIA", JSON.stringify(preferencias));
+    sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones_unicos));
 
-    //   Actualizar la UI
+    // Actualizar la UI
     actualizarListaDesdeArray("listaFacultades", facultades);
     actualizarListaDesdeArray("listaCarreras", carreras);
     actualizarListaDesdeArray("listaAptitudes", aptitudes);
+    actualizarListaDesdeArray("listaCursos", curso_unico_);
+    actualizarListaDesdeArray("listaDias", dias);
+    actualizarListaDesdeArray("listaHoras", horas);
+    actualizarListaDesdeArray("listaHabilidadesUnicas", habilidades_unicas);
+    actualizarListaDesdeArray("listaHabilidades", habilidades);
+    actualizarListaDesdeArray("listaInteresesUnicos", intereses_unicos);
+    actualizarListaDesdeArray("listaIntereses", intereses);
+    actualizarListaDesdeArray("listaPreferencias", preferencias);
+    actualizarListaDesdeArray("listaSecciones", secciones_unicos);
 }
 
 //   Función para actualizar listas en la UI
