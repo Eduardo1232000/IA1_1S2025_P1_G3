@@ -197,7 +197,7 @@ body.aparecer {
     box-sizing: border-box;
 }
 
-#listaFacultades, #listaCarreras, #listaAptitudes {
+#listaHora, #listaSeccion {
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */
