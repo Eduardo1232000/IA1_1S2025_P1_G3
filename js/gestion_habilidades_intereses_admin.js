@@ -86,7 +86,7 @@ function agregarInteresDesdeUI() {
     const interes = inputInteres.value.trim();
 
     if (interes) {
-        let listaIntereses = document.getElementById("listaCarreras");
+        let listaIntereses = document.getElementById("listaIntereses");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
