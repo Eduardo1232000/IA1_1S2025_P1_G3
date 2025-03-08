@@ -189,7 +189,7 @@ body.aparecer {
 }
 
 
-#ADMIN_DIV_FACULTADES, #ADMIN_DIV_CARRERAS, #ADMIN_DIV_APTITUDES {
+#ADMIN_DIV_FACULTADES, #ADMIN_DIV_CARRERAS {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -197,7 +197,7 @@ body.aparecer {
     box-sizing: border-box;
 }
 
-#listaFacultades, #listaCarreras, #listaAptitudes {
+#listaHabilidadesUnicas, #listaIntereses{
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */
@@ -228,7 +228,7 @@ li {
     padding: 5px;
     margin-top: 5px;
     background: #fff;
-    width: 300px; /* Ajusta el ancho */
+    width: 400px; /* Ajusta el ancho */
     border-radius: 5px;
     list-style: none; /* Quita los estilos de lista */
     text-align: left;

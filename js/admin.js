@@ -180,17 +180,31 @@ function actualizarListaDesdeArray(idLista, elementos) {
     });
 }
 
-//   Función para guardar datos en sessionStorage
 function AccionSiguiente() {
+    // Guardar las listas en sessionStorage
     sessionStorage.setItem("FACULTAD", JSON.stringify(obtenerLista("listaFacultades")));
     sessionStorage.setItem("CARRERA", JSON.stringify(obtenerLista("listaCarreras")));
     sessionStorage.setItem("APTITUD", JSON.stringify(obtenerLista("listaAptitudes")));
+    // sessionStorage.setItem("HABILIDAD_UNICA", JSON.stringify(obtenerLista("listaHabilidades")));
+    // sessionStorage.setItem("INTERES_UNICO", JSON.stringify(obtenerLista("listaIntereses")));
+    // sessionStorage.setItem("HORA", JSON.stringify(obtenerLista("listaHoras")));
+    // sessionStorage.setItem("DIA", JSON.stringify(obtenerLista("listaDias")));
+    // sessionStorage.setItem("CURSO_UNICO", JSON.stringify(obtenerLista("listaCursos")));
+    // sessionStorage.setItem("SECCION_UNICO", JSON.stringify(obtenerLista("listaSecciones")));
+    // sessionStorage.setItem("PREFERENCIA", JSON.stringify(obtenerLista("listaPreferencias")));
+
     console.log("Datos guardados en sessionStorage");
 }
 
-//   Funciones para obtener datos de la UI
+// Función para obtener los elementos de las listas
 function obtenerLista(idLista) {
-    return [...document.getElementById(idLista).children].map(li => li.textContent.replace("❌", "").trim());
+    let listaElementos = [];
+    let lista = document.getElementById(idLista);
+    let items = lista.getElementsByTagName("li");
+    for (let item of items) {
+        listaElementos.push(item.textContent.replace("❌", "").trim());
+    }
+    return listaElementos;
 }
 
 // Función para agregar una Facultad desde la interfaz de usuario
@@ -334,3 +348,291 @@ function actualizarListaDesdeArray(idLista, elementos) {
 }
 
 
+/*llllllllllllllllllll */
+
+// Función para agregar habilidad única desde la UI
+function agregarHabilidadUnicaDesdeUI() {
+    const inputHabilidad = document.getElementById("inputHabilidad");
+    const habilidad = inputHabilidad.value.trim();
+
+    if (habilidad) {
+        let listaHabilidades = document.getElementById("listaHabilidades");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = habilidad;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaHabilidades.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("habilidad", habilidad);
+        };
+
+        item.appendChild(btnEliminar);
+        listaHabilidades.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputHabilidad.value = "";
+
+        // Guardar en sessionStorage
+        let habilidades = JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA") || "[]");
+        habilidades.push(habilidad);
+        sessionStorage.setItem("HABILIDAD_UNICA", JSON.stringify(habilidades));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\nhabilidad("${habilidad}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un nombre de habilidad.");
+    }
+}
+
+// Función para agregar interés único desde la UI
+function agregarInteresUnicoDesdeUI() {
+    const inputInteres = document.getElementById("inputInteres");
+    const interes = inputInteres.value.trim();
+
+    if (interes) {
+        let listaIntereses = document.getElementById("listaIntereses");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = interes;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaIntereses.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("interes", interes);
+        };
+
+        item.appendChild(btnEliminar);
+        listaIntereses.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputInteres.value = "";
+
+        // Guardar en sessionStorage
+        let intereses = JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]");
+        intereses.push(interes);
+        sessionStorage.setItem("INTERES_UNICO", JSON.stringify(intereses));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\ninteres("${interes}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un interés.");
+    }
+}
+
+// Función para agregar hora desde la UI
+function agregarHoraDesdeUI() {
+    const inputHora = document.getElementById("inputHora");
+    const hora = inputHora.value.trim();
+
+    if (hora) {
+        let listaHoras = document.getElementById("listaHoras");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = hora;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaHoras.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("hora", hora);
+        };
+
+        item.appendChild(btnEliminar);
+        listaHoras.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputHora.value = "";
+
+        // Guardar en sessionStorage
+        let horas = JSON.parse(sessionStorage.getItem("HORA") || "[]");
+        horas.push(hora);
+        sessionStorage.setItem("HORA", JSON.stringify(horas));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\nhora("${hora}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa una hora.");
+    }
+}
+
+// Función para agregar día desde la UI
+function agregarDiaDesdeUI() {
+    const inputDia = document.getElementById("inputDia");
+    const dia = inputDia.value.trim();
+
+    if (dia) {
+        let listaDias = document.getElementById("listaDias");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = dia;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaDias.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("dia", dia);
+        };
+
+        item.appendChild(btnEliminar);
+        listaDias.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputDia.value = "";
+
+        // Guardar en sessionStorage
+        let dias = JSON.parse(sessionStorage.getItem("DIA") || "[]");
+        dias.push(dia);
+        sessionStorage.setItem("DIA", JSON.stringify(dias));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\ndia("${dia}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un día.");
+    }
+}
+
+// Función para agregar curso único desde la UI
+function agregarCursoUnicoDesdeUI() {
+    const inputCurso = document.getElementById("inputCurso");
+    const curso = inputCurso.value.trim();
+
+    if (curso) {
+        let listaCursos = document.getElementById("listaCursos");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = curso;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaCursos.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("curso", curso);
+        };
+
+        item.appendChild(btnEliminar);
+        listaCursos.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputCurso.value = "";
+
+        // Guardar en sessionStorage
+        let cursos = JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]");
+        cursos.push(curso);
+        sessionStorage.setItem("CURSO_UNICO", JSON.stringify(cursos));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\ncurso("${curso}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un curso.");
+    }
+}
+
+// Función para agregar sección única desde la UI
+function agregarSeccionUnicoDesdeUI() {
+    const inputSeccion = document.getElementById("inputSeccion");
+    const seccion = inputSeccion.value.trim();
+
+    if (seccion) {
+        let listaSecciones = document.getElementById("listaSecciones");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = seccion;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaSecciones.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("seccion", seccion);
+        };
+
+        item.appendChild(btnEliminar);
+        listaSecciones.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputSeccion.value = "";
+
+        // Guardar en sessionStorage
+        let secciones = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
+        secciones.push(seccion);
+        sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\nseccion("${seccion}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa una sección.");
+    }
+}
+
+// Función para agregar preferencia desde la UI
+function agregarPreferenciaDesdeUI() {
+    const inputPreferencia = document.getElementById("inputPreferencia");
+    const preferencia = inputPreferencia.value.trim();
+
+    if (preferencia) {
+        let listaPreferencias = document.getElementById("listaPreferencias");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = preferencia;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaPreferencias.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("preferencia", preferencia);
+        };
+
+        item.appendChild(btnEliminar);
+        listaPreferencias.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputPreferencia.value = "";
+
+        // Guardar en sessionStorage
+        let preferencias = JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]");
+        preferencias.push(preferencia);
+        sessionStorage.setItem("PREFERENCIA", JSON.stringify(preferencias));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\npreferencia("${preferencia}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa una preferencia.");
+    }
+}
