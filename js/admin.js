@@ -53,7 +53,7 @@ document.getElementById('fileInput').addEventListener('change', function (event)
 function procesarCodigoProlog(codigo) {
     let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [], curso_unico_ = [], dias = [];
     let horas = [], habilidades_unicas = [], habilidades = [], intereses_unicos = [], intereses = [], preferencias = [], secciones_unicos = [];
-    let seccion=[];
+    let seccion=[], horarios=[];
     let lineas = codigo.split("\n");
     
     lineas.forEach(linea => {
@@ -133,6 +133,21 @@ function procesarCodigoProlog(codigo) {
             let relacionCarreraAptitud = linea.match(/aptitud\((.*?),\s*(.*?)\)/);
             if (relacionCarreraAptitud) carreraAptitud.push({ carrera: relacionCarreraAptitud[1], aptitud: relacionCarreraAptitud[2] });
         }
+        // Relacion del horario
+        else if (linea.startsWith("horario(")) {
+            let relacionHorarios = linea.match(/horario\((.*?),\s*(.*?),\s*(.*?),\s*(.*?),\s*(.*?)\)/);
+            if (relacionHorarios) {
+                // Limpiar las comillas extra de los valores
+                let dia = relacionHorarios[1].replace(/'/g, '').trim();  // Eliminar comillas
+                let hora_inicio = relacionHorarios[2].replace(/'/g, '').trim();  // Eliminar comillas
+                let hora_fin = relacionHorarios[3].replace(/'/g, '').trim();  // Eliminar comillas
+                let seccion = relacionHorarios[4].replace(/'/g, '').trim();  // Eliminar comillas
+                let curso = relacionHorarios[5].replace(/'/g, '').trim();  // Eliminar comillas
+                
+                horarios.push({ dia, hora_inicio, hora_fin, seccion, curso });
+                console.log(horarios);
+            }
+        }
     });
 
     // Guardar en sessionStorage
@@ -151,6 +166,7 @@ function procesarCodigoProlog(codigo) {
     sessionStorage.setItem("PREFERENCIA", JSON.stringify(preferencias));
     sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones_unicos));
     sessionStorage.setItem("SECCION", JSON.stringify(seccion));
+    sessionStorage.setItem("HORARIO", JSON.stringify(horarios));
 
     // Actualizar la UI
     actualizarListaDesdeArray("listaFacultades", facultades);
@@ -166,6 +182,7 @@ function procesarCodigoProlog(codigo) {
     actualizarListaDesdeArray("listaPreferencias", preferencias);
     actualizarListaDesdeArray("listaSecciones_unicas", secciones_unicos);
     actualizarListaDesdeArray("listaSecciones", secciones);
+    actualizarListaDesdeArray("listaHorarios", horario);
 }
 
 //   Función para actualizar listas en la UI
@@ -635,5 +652,55 @@ function agregarPreferenciaDesdeUI() {
         sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
     } else {
         alert("Por favor, ingresa una preferencia.");
+    }
+}
+// Función para asociar el horario desde la UI
+function asociarHorarioDesdeUI() {
+    const selectCurso = document.getElementById("selectCurso");
+    const selectHoraI = document.getElementById("selectHoraI");
+    const selectHoraF = document.getElementById("selectHoraF");
+    const selectSeccion = document.getElementById("selectSeccion");
+
+    const curso = selectCurso.value.trim();
+    const horaInicio = selectHoraI.value.trim();
+    const horaFin = selectHoraF.value.trim();
+    const seccion = selectSeccion.value.trim();
+
+    if (curso && horaInicio && horaFin && seccion) {
+        let listaHorarios = document.getElementById("listaHorarios");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = `${curso} - ${horaInicio} a ${horaFin} - Sección: ${seccion}`;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaHorarios.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar("horario", `${curso}, ${horaInicio}, ${horaFin}, ${seccion}`);
+        };
+
+        item.appendChild(btnEliminar);
+        listaHorarios.appendChild(item);
+
+        // Limpiar los campos de selección
+        selectCurso.value = "";
+        selectHoraI.value = "";
+        selectHoraF.value = "";
+        selectSeccion.value = "";
+
+        // Guardar en sessionStorage
+        let horarios = JSON.parse(sessionStorage.getItem("HORARIO") || "[]");
+        horarios.push({ curso, hora_inicio: horaInicio, hora_fin: horaFin, seccion });
+        sessionStorage.setItem("HORARIO", JSON.stringify(horarios));
+
+        // Actualizar el código Prolog
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\nhorario("${curso}", "${horaInicio}", "${horaFin}", "${seccion}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa todos los datos para asociar un horario.");
     }
 }
