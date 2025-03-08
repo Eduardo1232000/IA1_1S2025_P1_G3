@@ -8,6 +8,7 @@ function cargarDatosDesdeSessionStorage() {
     
     // Cargar las listas desde sessionStorage
     let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
+    let cursos = new Set(JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]"));
     //interes
     let intereses = new Set(JSON.parse(sessionStorage.getItem("INTERES_UNICO")|| "[]"));
     let asociacionesCARINT = JSON.parse(sessionStorage.getItem("INTERES") || "[]");
@@ -15,16 +16,21 @@ function cargarDatosDesdeSessionStorage() {
     // habilidad
     let habilidades = new Set(JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA")|| "[]"));
     let asociacionesCARHAB = JSON.parse(sessionStorage.getItem("HABILIDAD") || "[]");
-    console.log(habilidades)
+    // seccion
+    let secciones = new Set(JSON.parse(sessionStorage.getItem("SECCION_UNICO")|| "[]"));
+    let asociacionesCARSEC = JSON.parse(sessionStorage.getItem("SECCION") || "[]");
+
     // Poblar los select
     poblarSelect("selectCarrera", [...carreras]);
     poblarSelect("selectInteres", [...intereses]);
     poblarSelect("selectCarreraHabilidad", [...carreras]);
     poblarSelect("selectHabilidad", [...habilidades]);
+    poblarSelect("select_car", [...cursos]);
+    poblarSelect("select_sec", [...secciones]);
     // Actualizar las listas de asociaciones
     actualizarLista("listaAsociacionCarreraInteres", asociacionesCARINT, "carrera", "interes");
-
     actualizarLista("listaAsociacionCarreraHabilidad", asociacionesCARHAB, "carrera", "habilidad");
+    actualizarLista("listaAsociacionCarreraSeccion", asociacionesCARSEC, "carrera", "seccion");
 }
 
 function poblarSelect(id, elementos) {
@@ -69,29 +75,27 @@ function asociarCarreraHabilidadDesdeUI() {
 }
 
 function asociarCarreraSeccionDesdeUI() {
-    let carrera = document.getElementById("selectCarrera").value;
-    let seccion = document.getElementById("selectFacultadSec").value;
+    let carrera = document.getElementById("select_car").value;
+    let seccion = document.getElementById("select_sec").value;
     if (carrera && seccion) {
         let nuevaLinea = { carrera, seccion };
-        agregarAsociacion(nuevaLinea, "CARRERA_SECCION");
+        agregarAsociacion(nuevaLinea, "SECCION");
     }
 }
 
 function agregarAsociacion(nuevaLinea, tipoAsociacion) {
     let asociaciones = JSON.parse(sessionStorage.getItem(tipoAsociacion) || "[]");
-
     // Verificar si la asociación ya existe
     let existe = asociaciones.some(asoc => {
-        if (tipoAsociacion === "FACULTAD_CARRERA") {
+        if (tipoAsociacion === "INTERES") {
             return asoc.facultad === nuevaLinea.facultad && asoc.carrera === nuevaLinea.carrera;
-        } else if (tipoAsociacion === "CARRERA_HABILIDAD") {
+        } else if (tipoAsociacion === "HABILIDAD") {
             return asoc.carrera === nuevaLinea.carrera && asoc.habilidad === nuevaLinea.habilidad;
-        } else if (tipoAsociacion === "CARRERA_SECCION") {
+        } else if (tipoAsociacion === "SECCION") {
             return asoc.carrera === nuevaLinea.carrera && asoc.seccion === nuevaLinea.seccion;
         }
         return false;
     });
-
     if (!existe) {
         asociaciones.push(nuevaLinea);
         sessionStorage.setItem(tipoAsociacion, JSON.stringify(asociaciones));
@@ -100,7 +104,6 @@ function agregarAsociacion(nuevaLinea, tipoAsociacion) {
         console.log("La asociación ya existe, no se agregará duplicada.");
     }
 }
-
 function AccionSiguiente() {
     console.log("Datos guardados en sessionStorage");
 }

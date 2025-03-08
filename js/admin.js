@@ -53,6 +53,7 @@ document.getElementById('fileInput').addEventListener('change', function (event)
 function procesarCodigoProlog(codigo) {
     let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [], curso_unico_ = [], dias = [];
     let horas = [], habilidades_unicas = [], habilidades = [], intereses_unicos = [], intereses = [], preferencias = [], secciones_unicos = [];
+    let seccion=[];
     let lineas = codigo.split("\n");
     
     lineas.forEach(linea => {
@@ -117,6 +118,11 @@ function procesarCodigoProlog(codigo) {
             let seccion_unico = linea.match(/seccion_unico\((.*?)\)/);
             if (seccion_unico) secciones_unicos.push(seccion_unico[1].slice(1, -1));
         } 
+        // Relacion carrera-seccion
+        else if (linea.startsWith("seccion(")) {
+            let relacionCarreraSeccion = linea.match(/seccion\((.*?),\s*(.*?)\)/);
+            if (relacionCarreraSeccion) seccion.push({ seccion: relacionCarreraSeccion[1], carrera: relacionCarreraSeccion[2] });
+        }
         // Relación facultad-carrera
         else if (linea.startsWith("facultad(")) {
             let relacionFacultadCarrera = linea.match(/facultad\((.*?),\s*(.*?)\)/);
@@ -144,6 +150,7 @@ function procesarCodigoProlog(codigo) {
     sessionStorage.setItem("INTERES", JSON.stringify(intereses));
     sessionStorage.setItem("PREFERENCIA", JSON.stringify(preferencias));
     sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones_unicos));
+    sessionStorage.setItem("SECCION", JSON.stringify(seccion));
 
     // Actualizar la UI
     actualizarListaDesdeArray("listaFacultades", facultades);
@@ -157,7 +164,8 @@ function procesarCodigoProlog(codigo) {
     actualizarListaDesdeArray("listaInteresesUnicos", intereses_unicos);
     actualizarListaDesdeArray("listaIntereses", intereses);
     actualizarListaDesdeArray("listaPreferencias", preferencias);
-    actualizarListaDesdeArray("listaSecciones", secciones_unicos);
+    actualizarListaDesdeArray("listaSecciones_unicas", secciones_unicos);
+    actualizarListaDesdeArray("listaSecciones", secciones);
 }
 
 //   Función para actualizar listas en la UI
@@ -600,14 +608,11 @@ function agregarSeccionUnicoDesdeUI() {
 function agregarPreferenciaDesdeUI() {
     const inputPreferencia = document.getElementById("inputPreferencia");
     const preferencia = inputPreferencia.value.trim();
-
     if (preferencia) {
         let listaPreferencias = document.getElementById("listaPreferencias");
-
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
         item.textContent = preferencia;
-
         // Crear botón de eliminar
         let btnEliminar = document.createElement("button");
         btnEliminar.textContent = "❌";
@@ -616,18 +621,14 @@ function agregarPreferenciaDesdeUI() {
             // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
             actualizarPrologDespuésDeEliminar("preferencia", preferencia);
         };
-
         item.appendChild(btnEliminar);
         listaPreferencias.appendChild(item);
-
         // Limpiar el campo de entrada
         inputPreferencia.value = "";
-
         // Guardar en sessionStorage
         let preferencias = JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]");
         preferencias.push(preferencia);
         sessionStorage.setItem("PREFERENCIA", JSON.stringify(preferencias));
-
         // Actualizar CODIGO_PROLOG
         let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
         CodigoProlog += `\npreferencia("${preferencia}").`;
