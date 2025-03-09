@@ -840,18 +840,30 @@ function actualizarPrologDespuésDeEliminar(tipo, valor) {
     sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista)); // Guardar de nuevo la lista actualizada
 }
 ```
-# Modulo del administrador
-![Imagen admin](img/admin.jpg)
-![Imagen habilidad_interes](img/hablidad_interes.jpg)
-![Imagen seccionesyHoras](img/seccionesYhoras.jpg)
-![Imagen asociaciones](img/asociaciones.jpg)
-![Imagen asociacionesCarreras](img/asociacionesAcarreras.jpg)
-![Imagen asociarhorarios](img/asociarHorarios.jpg)
-
-# Modulo del estudiante
-
-
+# Descargar archivo prolog
 
 ```html
+            <label for="downloadButton" id="ADMIN_TEXTO_DESCAR">Descargar archivo Prolog:</label>
+            <button id="downloadButton">Descargar</button>
+```
 
+
+```js
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // Obtener los datos de la lista 'CODIGO_PROLOG' desde sessionStorage
+    let codigoProlog = sessionStorage.getItem('CODIGO_PROLOG');
+    // Verificar si hay datos cargados en sessionStorage
+    if (!codigoProlog) {
+        alert("No hay datos Prolog disponibles para descargar.");
+        return; // Si no hay datos, no hacer nada
+    }
+    // Crear un Blob con el contenido Prolog
+    let blob = new Blob([codigoProlog], { type: 'text/plain' });
+    // Crear un enlace de descarga
+    let link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'codigo_prolog_G3.pl'; // Nombre del archivo de descarga
+    // Simular el clic en el enlace para iniciar la descarga
+    link.click();
+});
 ```
