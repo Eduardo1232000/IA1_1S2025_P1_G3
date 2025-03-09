@@ -162,10 +162,24 @@ body.aparecer {
     color: white;
     font-size: 2vh;
 }
+#downloadButton{
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    color: black;
+    font-size: 2vh;
+}
 #ADMIN_TEXTO_ARCHIVO{
     position: absolute;
     top: 9%;
-    left: 25%;
+    left: 20%;
+    color: white;
+    font-size: 3vh;
+}
+#ADMIN_TEXTO_DESCAR{
+    position: absolute;
+    top: 9%;
+    left: 50%;
     color: white;
     font-size: 3vh;
 }

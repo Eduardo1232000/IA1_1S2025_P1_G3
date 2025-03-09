@@ -721,3 +721,21 @@ function asociarHorarioDesdeUI() {
         alert("Por favor, ingresa todos los datos para asociar un horario.");
     }
 }
+
+document.getElementById('downloadButton').addEventListener('click', function() {
+    // Obtener los datos de la lista 'CODIGO_PROLOG' desde sessionStorage
+    let codigoProlog = sessionStorage.getItem('CODIGO_PROLOG');
+    // Verificar si hay datos cargados en sessionStorage
+    if (!codigoProlog) {
+        alert("No hay datos Prolog disponibles para descargar.");
+        return; // Si no hay datos, no hacer nada
+    }
+    // Crear un Blob con el contenido Prolog
+    let blob = new Blob([codigoProlog], { type: 'text/plain' });
+    // Crear un enlace de descarga
+    let link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'codigo_prolog_G3.pl'; // Nombre del archivo de descarga
+    // Simular el clic en el enlace para iniciar la descarga
+    link.click();
+});
