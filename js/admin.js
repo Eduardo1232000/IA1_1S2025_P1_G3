@@ -17,7 +17,7 @@ function validar_codigo_prolog() {
             return;
         }
         document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
-        procesarCodigoProlog(CodigoProlog);  //   Procesa los datos después de cargarlos
+        procesarCodigoProlog(CodigoProlog);  // Procesa los datos después de cargarlos
     } catch (error) {
         console.log("ERROR AL OBTENER CÓDIGO PROLOG", error);
     }
@@ -35,6 +35,8 @@ document.getElementById('fileInput').addEventListener('change', function (event)
             success: function () {
                 document.getElementById("STATUS_PROLOG").style.backgroundColor = "green";
                 sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+                //console.log("comienza todo");
+                //console.log(CodigoProlog);
                 procesarCodigoProlog(CodigoProlog); //   Procesar datos después de cargarlos
             },
             error: function (err) {
@@ -221,6 +223,16 @@ function procesarCodigoProlog(codigo) {
     actualizarListaDesdeArray("listaHorarios", horarios);
 }
 
+function agregarElementoEnLista(tipo, valor) {
+    let lista = JSON.parse(sessionStorage.getItem(tipo.toUpperCase()) || "[]");
+
+    // Verificar si el valor ya está en la lista
+    if (!lista.includes(valor)) {
+        lista.push(valor); // Si no está, agregar el valor
+        sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista));
+    }
+}
+
 //   Función para actualizar listas en la UI
 function actualizarListaDesdeArray(idLista, elementos) {
     let lista = document.getElementById(idLista);
@@ -234,7 +246,7 @@ function actualizarListaDesdeArray(idLista, elementos) {
         btnEliminar.onclick = function () {
             lista.removeChild(item);
             // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar(idLista.replace('lista', '').toLowerCase(), texto);
+            actualizarPrologDespuésDeEliminar('facultad', texto);  // Por ejemplo, eliminar 'facultad'
         };
         item.appendChild(btnEliminar);
         lista.appendChild(item);
@@ -264,6 +276,7 @@ function escapeRegExp(str) {
 }
 
 // Función para eliminar un item de CODIGO_PROLOG después de la eliminación
+// Función para eliminar un item de CODIGO_PROLOG después de la eliminación
 function actualizarPrologDespuésDeEliminar(tipo, valor) {
     let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
     
@@ -273,18 +286,18 @@ function actualizarPrologDespuésDeEliminar(tipo, valor) {
     // Escapar el valor antes de pasarlo a la expresión regular
     const valorEscapado = escapeRegExp(valor);
     
-    // Crear la expresión regular para eliminar la línea de Prolog
-    const regex = new RegExp(`${tipo}\\("${valorEscapado}"\\)\\.`);
+    // Crear la expresión regular para eliminar TODAS las líneas de Prolog que mencionen el valor
+    const regex = new RegExp(`${tipo}\\("${valorEscapado}"[^\\)]*\\)\\.`, "g"); // 'g' para todas las ocurrencias
     
-    // Eliminar la línea del código Prolog
+    // Eliminar todas las líneas que coinciden con la expresión regular
     CodigoProlog = CodigoProlog.replace(regex, "");
     
     // Guardar el nuevo Código Prolog actualizado
     sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
     
-    // También actualizar sessionStorage para las listas
+    // Actualizar las listas en sessionStorage: eliminar la entrada de la facultad/carrera/aptitud
     let lista = JSON.parse(sessionStorage.getItem(tipo.toUpperCase()) || "[]");
-    lista = lista.filter(item => item !== valor); // Eliminar el valor de la lista
+    lista = lista.filter(item => item.indexOf(valor) === -1); // Filtra el valor que contiene la facultad/carrera/aptitud
     sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista)); // Guardar de nuevo la lista actualizada
 }
 
