@@ -10,18 +10,23 @@ function cargarDatosDesdeSessionStorage() {
     let facultades = new Set(JSON.parse(sessionStorage.getItem("FACULTAD") || "[]"));
     let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
     let aptitudes = new Set(JSON.parse(sessionStorage.getItem("APTITUD") || "[]"));
+    let preferencia_unica = new Set(JSON.parse(sessionStorage.getItem("PREFERENCIA_UNICA") || "[]"));
     let asociacionesFacCarr = JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]");
     let asociacionesCarApt = JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]");
-
+    let asociacionesPrefCar = JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]");
+    console.log(asociacionesPrefCar)
     // Poblar los select
     poblarSelect("selectFacultad", [...facultades]);
     poblarSelect("selectCarrera", [...carreras]);
     poblarSelect("selectCarreraApt", [...carreras]);
+    poblarSelect("selectCarreraPrf", [...carreras]);
     poblarSelect("selectAptitud", [...aptitudes]);
+    poblarSelect("selectPreferencia", [...preferencia_unica]);
 
     // Actualizar las listas de asociaciones
     actualizarLista("listaAsociacionesFacCarr", asociacionesFacCarr, "facultad", "carrera");
     actualizarLista("listaAsociacionesCarApt", asociacionesCarApt, "carrera", "aptitud");
+    actualizarLista("listaAsociacionesPrefCarr", asociacionesPrefCar, "preferencia", "carrera");
 }
 
 function poblarSelect(id, elementos) {

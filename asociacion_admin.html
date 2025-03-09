@@ -6,6 +6,28 @@
     <title>Asociaciones - IA</title>
     <script src="js/tau-prolog.js"></script>
     <link rel="stylesheet" href="css/asociacion_admin.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body class="tema_anaranjado">
     <div id='CUADRO_GRANDE_ADMIN'>
@@ -15,7 +37,7 @@
 
         <div id="ADMIN_DIV">
             <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('asociaciones_carrera_admin.html');"> Siguiente</button>
-            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('seccion_horario.html');"> Regresar</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('curso_dia_preferencia.html');"> Regresar</button>
 
             <!-- Sección de Asociación Facultad - Carrera y Asociación Carrera - Aptitud -->
             <div id="ADMIN_DIV_ASOC_HORIZONTAL">
@@ -41,6 +63,29 @@
 
                     <!-- Lista de Asociaciones -->
                     <ul id="listaAsociacionesFacCarr" class="lista-scroll"></ul>
+                </div>
+
+                <div id="ADMIN_DIV_ASOC_PREF_CAR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Preferencia con Carrera</label>
+
+                    <!-- Select para Preferencia y Carrera -->
+                    <div class="input-container">
+                        <select id="selectPreferencia">
+                            <option value="">Seleccione una Preferencia</option>
+                        </select>
+                        <select id="selectCarreraPrf">
+                            <option value="">Seleccione una carrera</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarFacultadCarreraDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="listaAsociacionesPrefCarr" class="lista-scroll"></ul>
                 </div>
 
                 <!-- Sección de Asociación Carrera - Aptitud -->

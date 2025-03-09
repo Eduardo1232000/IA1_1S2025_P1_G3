@@ -180,6 +180,13 @@ respuesta(p3,'ambiente creativo').
 respuesta(p4,'ambiente internacional').
 respuesta(p4,'ambiente local').
 
+preferencia_unica('ambiente estructurado').
+preferencia_unica('enfoque practico').
+preferencia_unica('trabajo en equipo').
+preferencia_unica('enfoque teorico').
+preferencia_unica('trabajo individual').
+
+
 preferencia('ambiente estructurado','electronica').
 preferencia('enfoque practico','electronica').
 preferencia('trabajo en equipo','electronica').
