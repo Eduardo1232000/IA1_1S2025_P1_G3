@@ -160,8 +160,8 @@ function procesarCodigoProlog(codigo) {
     //let facultadesExistentes = JSON.parse(sessionStorage.getItem("FACULTAD") || "[]");
     let carrerasExistentes = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
     //let aptitudesExistentes = JSON.parse(sessionStorage.getItem("APTITUD") || "[]");
-    let facultadCarreraExistente = JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]");
-    let carreraAptitudExistente = JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]");
+    let facultadCarreraExistente = JSON.parse(sessionStorage.getItem("FACULTAD") || "[]");
+    let carreraAptitudExistente = JSON.parse(sessionStorage.getItem("APTITUD") || "[]");
     let cursoUnicoExistente = JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]");
     let diasExistentes = JSON.parse(sessionStorage.getItem("DIA") || "[]");
     let horasExistentes = JSON.parse(sessionStorage.getItem("HORA") || "[]");
@@ -204,8 +204,8 @@ function procesarCodigoProlog(codigo) {
     //sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
     sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
     //sessionStorage.setItem("APTITUD", JSON.stringify(aptitudes));
-    sessionStorage.setItem("FACULTAD_CARRERA", JSON.stringify(facultadCarrera));
-    sessionStorage.setItem("CARRERA_APTITUD", JSON.stringify(carreraAptitud));
+    sessionStorage.setItem("FACULTAD", JSON.stringify(facultadCarrera));
+    sessionStorage.setItem("APTITUD", JSON.stringify(carreraAptitud));
     sessionStorage.setItem("CURSO_UNICO", JSON.stringify(curso_unico_));
     sessionStorage.setItem("DIA", JSON.stringify(dias));
     sessionStorage.setItem("HORA", JSON.stringify(horas));

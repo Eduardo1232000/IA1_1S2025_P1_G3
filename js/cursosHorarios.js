@@ -22,8 +22,8 @@ function cargarDatosDesdeSessionStorage() {
     poblarSelect("selectSeccion", [...secciones]);
 
     // Actualizar la lista de asociaciones
-    actualizarLista("listaAsociacionesFacCarr", asociacionesCursosHorarios, "curso", "seccion");
-    actualizarLista2("listaAsociacionesCarr_Cur", asociacionesCarrerasCursos, "curso", "carrera");
+    actualizarLista("HORARIO", asociacionesCursosHorarios, "curso", "seccion");
+    actualizarLista2("CURSO", asociacionesCarrerasCursos, "curso", "carrera");
 }
 
 function poblarSelect(id, elementos) {

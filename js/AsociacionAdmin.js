@@ -11,8 +11,8 @@ function cargarDatosDesdeSessionStorage() {
     let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
     let aptitudes = new Set(JSON.parse(sessionStorage.getItem("APTITUD_UNICO") || "[]"));
     let preferencia_unica = new Set(JSON.parse(sessionStorage.getItem("PREFERENCIA_UNICA") || "[]"));
-    let asociacionesFacCarr = JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]");
-    let asociacionesCarApt = JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]");
+    let asociacionesFacCarr = JSON.parse(sessionStorage.getItem("FACULTAD") || "[]");
+    let asociacionesCarApt = JSON.parse(sessionStorage.getItem("APTITUD") || "[]");
     let asociacionesPrefCar = JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]");
     console.log(asociacionesPrefCar)
     // Poblar los select
@@ -24,9 +24,9 @@ function cargarDatosDesdeSessionStorage() {
     poblarSelect("selectPreferencia", [...preferencia_unica]);
 
     // Actualizar las listas de asociaciones
-    actualizarLista("listaAsociacionesFacCarr", asociacionesFacCarr, "facultad", "carrera");
-    actualizarLista("listaAsociacionesCarApt", asociacionesCarApt, "carrera", "aptitud");
-    actualizarLista("listaAsociacionesPrefCarr", asociacionesPrefCar, "preferencia", "carrera");
+    actualizarLista("FACULTAD", asociacionesFacCarr, "facultad", "carrera");
+    actualizarLista("APTITUD", asociacionesCarApt, "carrera", "aptitud");
+    actualizarLista("PREFERENCIA", asociacionesPrefCar, "preferencia", "carrera");
 }
 
 function poblarSelect(id, elementos) {
@@ -57,7 +57,7 @@ function asociarFacultadCarreraDesdeUI() {
     let carrera = document.getElementById("selectCarrera").value;
     if (facultad && carrera) {
         let nuevaLinea = { facultad, carrera };
-        agregarAsociacion(nuevaLinea, "FACULTAD_CARRERA");
+        agregarAsociacion(nuevaLinea, "FACULTAD");
     }
 }
 
@@ -66,7 +66,16 @@ function asociarCarreraAptitudDesdeUI() {
     let aptitud = document.getElementById("selectAptitud").value;
     if (carrera && aptitud) {
         let nuevaLinea = { carrera, aptitud };
-        agregarAsociacion(nuevaLinea, "CARRERA_APTITUD");
+        agregarAsociacion(nuevaLinea, "APTITUD");
+    }
+}
+
+function asociarCarreraPreferenciaDesdeUI() {
+    let preferencia = document.getElementById("selectPreferencia").value;
+    let carrera = document.getElementById("selectCarreraPrf").value;
+    if (preferencia && carrera) {
+        let nuevaLinea = { preferencia, carrera };
+        agregarAsociacion(nuevaLinea, "PREFERENCIA");
     }
 }
 
@@ -75,10 +84,12 @@ function agregarAsociacion(nuevaLinea, tipoAsociacion) {
 
     // Verificar si la asociación ya existe
     let existe = asociaciones.some(asoc => {
-        if (tipoAsociacion === "FACULTAD_CARRERA") {
+        if (tipoAsociacion === "FACULTAD") {
             return asoc.facultad === nuevaLinea.facultad && asoc.carrera === nuevaLinea.carrera;
-        } else if (tipoAsociacion === "CARRERA_APTITUD") {
+        } else if (tipoAsociacion === "APTITUD") {
             return asoc.carrera === nuevaLinea.carrera && asoc.aptitud === nuevaLinea.aptitud;
+        }else if (tipoAsociacion === "PREFERENCIA") {
+            return asoc.preferencia === nuevaLinea.preferencia && asoc.carrera === nuevaLinea.preferencia;
         }
         return false;
     });

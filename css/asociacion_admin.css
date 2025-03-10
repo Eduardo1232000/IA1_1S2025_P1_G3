@@ -157,7 +157,7 @@ body.aparecer {
 }
 
 /* Estilo de cada item en la lista */
-#listaAsociacionesFacCarr li, #listaAsociacionesCarApt li , #listaAsociacionesPrefCarr li {
+#FACULTAD li, #APTITUD li , #PREFERENCIA li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     font-size: 2vh;

@@ -133,7 +133,7 @@ body.aparecer {
 }
 
 /* Estilo de cada item en la lista */
-#listaAsociacionesFacCarr li, #listaAsociacionesCarApt li {
+#HORARIO li, #CURSO li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     font-size: 2vh;

@@ -28,9 +28,9 @@ function cargarDatosDesdeSessionStorage() {
     poblarSelect("select_car", [...cursos]);
     poblarSelect("select_sec", [...secciones]);
     // Actualizar las listas de asociaciones
-    actualizarLista("listaAsociacionCarreraInteres", asociacionesCARINT, "carrera", "interes");
-    actualizarLista("listaAsociacionCarreraHabilidad", asociacionesCARHAB, "carrera", "habilidad");
-    actualizarLista("listaAsociacionCarreraSeccion", asociacionesCARSEC, "carrera", "seccion");
+    actualizarLista("INTERES", asociacionesCARINT, "carrera", "interes");
+    actualizarLista("HABILIDAD", asociacionesCARHAB, "carrera", "habilidad");
+    actualizarLista("SECCION", asociacionesCARSEC, "carrera", "seccion");
 }
 
 function poblarSelect(id, elementos) {
