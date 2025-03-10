@@ -152,42 +152,43 @@ function procesarCodigoProlog(codigo) {
     });
 
     // Recuperar los valores actuales de sessionStorage y agregarlos a las listas existentes
-    let facultadesExistentes = JSON.parse(sessionStorage.getItem("FACULTAD") || "[]");
-    let carrerasExistentes = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
-    let aptitudesExistentes = JSON.parse(sessionStorage.getItem("APTITUD") || "[]");
-    let facultadCarreraExistente = JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]");
-    let carreraAptitudExistente = JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]");
-    let cursoUnicoExistente = JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]");
-    let diasExistentes = JSON.parse(sessionStorage.getItem("DIA") || "[]");
-    let horasExistentes = JSON.parse(sessionStorage.getItem("HORA") || "[]");
-    let habilidadesUnicasExistentes = JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA") || "[]");
-    let habilidadesExistentes = JSON.parse(sessionStorage.getItem("HABILIDAD") || "[]");
-    let interesesUnicosExistentes = JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]");
-    let interesesExistentes = JSON.parse(sessionStorage.getItem("INTERES") || "[]");
-    let preferenciasUnicasExistentes = JSON.parse(sessionStorage.getItem("PREFERENCIA_UNICA") || "[]");
-    let preferenciasExistentes = JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]");
-    let seccionesUnicasExistentes = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
-    let seccionExistente = JSON.parse(sessionStorage.getItem("SECCION") || "[]");
-    let horariosExistentes = JSON.parse(sessionStorage.getItem("HORARIO") || "[]");
+// Recuperar los valores actuales de sessionStorage
+    let facultadesExistentes = new Set(JSON.parse(sessionStorage.getItem("FACULTAD") || "[]"));
+    let carrerasExistentes = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
+    let aptitudesExistentes = new Set(JSON.parse(sessionStorage.getItem("APTITUD") || "[]"));
+    let facultadCarreraExistente = new Set(JSON.parse(sessionStorage.getItem("FACULTAD_CARRERA") || "[]"));
+    let carreraAptitudExistente = new Set(JSON.parse(sessionStorage.getItem("CARRERA_APTITUD") || "[]"));
+    let cursoUnicoExistente = new Set(JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]"));
+    let diasExistentes = new Set(JSON.parse(sessionStorage.getItem("DIA") || "[]"));
+    let horasExistentes = new Set(JSON.parse(sessionStorage.getItem("HORA") || "[]"));
+    let habilidadesUnicasExistentes = new Set(JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA") || "[]"));
+    let habilidadesExistentes = new Set(JSON.parse(sessionStorage.getItem("HABILIDAD") || "[]"));
+    let interesesUnicosExistentes = new Set(JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]"));
+    let interesesExistentes = new Set(JSON.parse(sessionStorage.getItem("INTERES") || "[]"));
+    let preferenciasUnicasExistentes = new Set(JSON.parse(sessionStorage.getItem("PREFERENCIA_UNICA") || "[]"));
+    let preferenciasExistentes = new Set(JSON.parse(sessionStorage.getItem("PREFERENCIA") || "[]"));
+    let seccionesUnicasExistentes = new Set(JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]"));
+    let seccionExistente = new Set(JSON.parse(sessionStorage.getItem("SECCION") || "[]"));
+    let horariosExistentes = new Set(JSON.parse(sessionStorage.getItem("HORARIO") || "[]"));
 
     // Solo agregar si no existen datos para evitar duplicados
-    facultades = [...new Set([...facultadesExistentes, ...facultades])];
-    carreras = [...new Set([...carrerasExistentes, ...carreras])];
-    aptitudes = [...new Set([...aptitudesExistentes, ...aptitudes])];
-    facultadCarrera = [...new Set([...facultadCarreraExistente, ...facultadCarrera])];
-    carreraAptitud = [...new Set([...carreraAptitudExistente, ...carreraAptitud])];
-    curso_unico_ = [...new Set([...cursoUnicoExistente, ...curso_unico_])];
-    dias = [...new Set([...diasExistentes, ...dias])];
-    horas = [...new Set([...horasExistentes, ...horas])];
-    habilidades_unicas = [...new Set([...habilidadesUnicasExistentes, ...habilidades_unicas])];
-    habilidades = [...new Set([...habilidadesExistentes, ...habilidades])];
-    intereses_unicos = [...new Set([...interesesUnicosExistentes, ...intereses_unicos])];
-    intereses = [...new Set([...interesesExistentes, ...intereses])];
-    preferencias_unicas = [...new Set([...preferenciasUnicasExistentes, ...preferencias_unicas])];
-    preferencias = [...new Set([...preferenciasExistentes, ...preferencias])];
-    secciones_unicos = [...new Set([...seccionesUnicasExistentes, ...secciones_unicos])];
-    seccion = [...new Set([...seccionExistente, ...seccion])];
-    horarios = [...new Set([...horariosExistentes, ...horarios])];
+    facultades = new Set([...facultadesExistentes, ...facultades]);
+    carreras = new Set([...carrerasExistentes, ...carreras]);
+    aptitudes = new Set([...aptitudesExistentes, ...aptitudes]);
+    facultadCarrera = new Set([...facultadCarreraExistente, ...facultadCarrera]);
+    carreraAptitud = new Set([...carreraAptitudExistente, ...carreraAptitud]);
+    curso_unico_ = new Set([...cursoUnicoExistente, ...curso_unico_]);
+    dias = new Set([...diasExistentes, ...dias]);
+    horas = new Set([...horasExistentes, ...horas]);
+    habilidades_unicas = new Set([...habilidadesUnicasExistentes, ...habilidades_unicas]);
+    habilidades = new Set([...habilidadesExistentes, ...habilidades]);
+    intereses_unicos = new Set([...interesesUnicosExistentes, ...intereses_unicos]);
+    intereses = new Set([...interesesExistentes, ...intereses]);
+    preferencias_unicas = new Set([...preferenciasUnicasExistentes, ...preferencias_unicas]);
+    preferencias = new Set([...preferenciasExistentes, ...preferencias]);
+    secciones_unicos = new Set([...seccionesUnicasExistentes, ...secciones_unicos]);
+    seccion = new Set([...seccionExistente, ...seccion]);
+    horarios = new Set([...horariosExistentes, ...horarios]);
 
     // Guardar todos los datos actualizados en sessionStorage
     sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
@@ -208,19 +209,10 @@ function procesarCodigoProlog(codigo) {
     sessionStorage.setItem("SECCION", JSON.stringify(seccion));
     sessionStorage.setItem("HORARIO", JSON.stringify(horarios));
 
-    // Actualizar la interfaz con los datos
-    actualizarListaDesdeArray("listaFacultades", facultades);
-    actualizarListaDesdeArray("listaCarreras", carreras);
-    actualizarListaDesdeArray("listaAptitudes", aptitudes);
-    actualizarListaDesdeArray("listaCursos", curso_unico_);
-    actualizarListaDesdeArray("listaDias", dias);
-    actualizarListaDesdeArray("listaHoras", horas);
-    actualizarListaDesdeArray("listaHabilidades", habilidades);
-    actualizarListaDesdeArray("listaIntereses", intereses);
-    actualizarListaDesdeArray("listaPreferencias", preferencias_unicas);
-    actualizarListaDesdeArray("listaAsociacionesPrefCarr", preferencias);//lo necesito despues
-    actualizarListaDesdeArray("listaSecciones", secciones_unicos);
-    actualizarListaDesdeArray("listaHorarios", horarios);
+    // Poblar las listas
+    actualizarListaDesdeArray("FACULTAD", [...facultades]);
+    actualizarListaDesdeArray("CARRERA", [...carreras]);
+    actualizarListaDesdeArray("APTITUD", [...aptitudes]);
 }
 
 function agregarElementoEnLista(tipo, valor) {
@@ -232,31 +224,32 @@ function agregarElementoEnLista(tipo, valor) {
         sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista));
     }
 }
-
 //   Función para actualizar listas en la UI
 function actualizarListaDesdeArray(idLista, elementos) {
     let lista = document.getElementById(idLista);
-    lista.innerHTML = ""; // Limpiar lista antes de agregar nuevos elementos
-
-    elementos.forEach(texto => {
+    if (!lista) return;
+    lista.innerHTML = "";
+    elementos.forEach(el => {
         let item = document.createElement("li");
-        item.textContent = texto;
+        item.textContent = el;
+
+        // Crear botón de eliminar
         let btnEliminar = document.createElement("button");
         btnEliminar.textContent = "❌";
         btnEliminar.onclick = function () {
             lista.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar(texto,idLista);  // Por ejemplo, eliminar 'facultad'
+            actualizarPrologDespuésDeEliminar(el, idLista);
         };
+
         item.appendChild(btnEliminar);
         lista.appendChild(item);
     });
 }
 
 function AccionSiguiente() {
-    sessionStorage.setItem("FACULTAD", JSON.stringify(obtenerLista("listaFacultades")));
-    sessionStorage.setItem("CARRERA", JSON.stringify(obtenerLista("listaCarreras")));
-    sessionStorage.setItem("APTITUD", JSON.stringify(obtenerLista("listaAptitudes")));
+    // sessionStorage.setItem("FACULTAD", JSON.stringify(obtenerLista("listaFacultades")));
+    // sessionStorage.setItem("CARRERA", JSON.stringify(obtenerLista("listaCarreras")));
+    // sessionStorage.setItem("APTITUD", JSON.stringify(obtenerLista("listaAptitudes")));
     console.log("Datos guardados en sessionStorage");
 }
 
@@ -277,102 +270,12 @@ function escapeRegExp(str) {
 
 // Función para eliminar un item de CODIGO_PROLOG después de la eliminación
 // Función para eliminar un item de CODIGO_PROLOG después de la eliminación
-function actualizarPrologDespuésDeEliminar(tipo, valor) {
-    let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-    
-    // Asegúrate de que el valor tiene comillas y esté en el formato correcto
-    valor = valor.trim();  // Eliminar espacios adicionales
-    
-    // Escapar el valor antes de pasarlo a la expresión regular
-    const valorEscapado = escapeRegExp(valor);
-    
-    // Crear la expresión regular para eliminar TODAS las líneas de Prolog que mencionen el valor
-    const regex = new RegExp(`${tipo}\\("${valorEscapado}"[^\\)]*\\)\\.`, "g"); // 'g' para todas las ocurrencias
-    
-    // Eliminar todas las líneas que coinciden con la expresión regular
-    CodigoProlog = CodigoProlog.replace(regex, "");
-    
-    // Guardar el nuevo Código Prolog actualizado
-    sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-    
-    // Actualizar las listas en sessionStorage: eliminar la entrada de la facultad/carrera/aptitud
-    let lista = JSON.parse(sessionStorage.getItem(tipo.toUpperCase()) || "[]");
-    lista = lista.filter(item => item.indexOf(valor) === -1); // Filtra el valor que contiene la facultad/carrera/aptitud
-    sessionStorage.setItem(tipo.toUpperCase(), JSON.stringify(lista)); // Guardar de nuevo la lista actualizada
+function actualizarPrologDespuésDeEliminar(elemento, listaId) {
+    let lista = JSON.parse(sessionStorage.getItem(listaId) || "[]");
+    lista = lista.filter(item => item !== elemento);
+    sessionStorage.setItem(listaId, JSON.stringify(lista));
 }
 
-//   Función para actualizar las listas en la UI desde un array
-function actualizarListaDesdeArray(idLista, elementos) {
-    let lista = document.getElementById(idLista);
-    lista.innerHTML = ""; // Limpiar lista antes de agregar nuevos elementos
-
-    elementos.forEach(texto => {
-        let item = document.createElement("li");
-        item.textContent = texto;
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            lista.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar('facultad', texto);
-            actualizarPrologDespuésDeEliminar('carrera', texto);
-            actualizarPrologDespuésDeEliminar('aptitud', texto);
-
-        };
-        item.appendChild(btnEliminar);
-        lista.appendChild(item);
-    });
-}
-
-
-/*llllllllllllllllllll */
-
-// Función para agregar día desde la UI
-
-// Función para agregar curso único desde la UI
-function agregarCursoUnicoDesdeUI() {
-    const inputCurso = document.getElementById("inputCurso");
-    const curso = inputCurso.value.trim();
-
-    if (curso) {
-        let listaCursos = document.getElementById("listaCursos");
-
-        // Crear un nuevo elemento de lista
-        let item = document.createElement("li");
-        item.textContent = curso;
-
-        // Crear botón de eliminar
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            listaCursos.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar("curso", curso);
-        };
-
-        item.appendChild(btnEliminar);
-        listaCursos.appendChild(item);
-
-        // Limpiar el campo de entrada
-        inputCurso.value = "";
-
-        // Guardar en sessionStorage
-        let cursos = JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]");
-        cursos.push(curso);
-        sessionStorage.setItem("CURSO_UNICO", JSON.stringify(cursos));
-
-        // Actualizar CODIGO_PROLOG
-        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-        CodigoProlog += `\ncurso("${curso}").`;
-        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-    } else {
-        alert("Por favor, ingresa un curso.");
-    }
-}
-
-// Función para agregar sección única desde la UI
-
-// Función para agregar preferencia desde la UI
 
 document.getElementById('downloadButton').addEventListener('click', function() {
     // Obtener los datos de la lista 'CODIGO_PROLOG' desde sessionStorage
@@ -391,3 +294,128 @@ document.getElementById('downloadButton').addEventListener('click', function() {
     // Simular el clic en el enlace para iniciar la descarga
     link.click();
 });
+
+function agregarFacultadDesdeUI() {
+    const inputFacultad = document.getElementById("inputFacultad");
+    const facultad = inputFacultad.value.trim();
+
+    if (facultad) {
+        // Verificar si ya existe
+        let facultades = JSON.parse(sessionStorage.getItem("FACULTAD"));
+        if (!facultades.includes(facultad)) {
+            let listaFacultades = document.getElementById("FACULTAD");
+
+            // Crear un nuevo elemento de lista
+            let item = document.createElement("li");
+            item.textContent = facultad;
+
+            // Crear botón de eliminar
+            let btnEliminar = document.createElement("button");
+            btnEliminar.textContent = "❌";
+            btnEliminar.onclick = function () {
+                listaFacultades.removeChild(item);
+                // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+                actualizarPrologDespuésDeEliminar(facultad,"FACULTAD");
+            };
+
+            item.appendChild(btnEliminar);
+            listaFacultades.appendChild(item);
+
+            // Limpiar el campo de entrada
+            inputFacultad.value = "";
+
+            // Guardar en sessionStorage
+            facultades.push(facultad);
+            sessionStorage.setItem("FACULTAD", JSON.stringify(facultades));
+
+            // Actualizar CODIGO_PROLOG
+            let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+            CodigoProlog += `\nfacultad("${facultad}").`;
+            sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+        } else {
+            alert("La facultad ya existe.");
+        }
+    } else {
+        alert("Por favor, ingresa un nombre de facultad.");
+    }
+}
+
+function agregarCarreraDesdeUI() {
+    const inputCarrera = document.getElementById("inputCarrera");
+    const carrera = inputCarrera.value.trim();
+
+    if (carrera) {
+        let listaCarreras = document.getElementById("CARRERA");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = carrera;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaCarreras.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar(carrera,"CARRERA");
+        };
+
+        item.appendChild(btnEliminar);
+        listaCarreras.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputCarrera.value = "";
+
+        // Guardar en sessionStorage
+        let carreras = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
+        carreras.push(carrera);
+        sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\ncarrera("${carrera}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un nombre de carrera.");
+    }
+}
+
+function agregarAptitudDesdeUI() {
+    const inputAptitud = document.getElementById("inputAptitud");
+    const aptitud = inputAptitud.value.trim();
+
+    if (aptitud) {
+        let listaAptitudes = document.getElementById("APTITUD");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = aptitud;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaAptitudes.removeChild(item);
+            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
+            actualizarPrologDespuésDeEliminar(aptitud, "APTITUD");
+        };
+
+        item.appendChild(btnEliminar);
+        listaAptitudes.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputAptitud.value = "";
+
+        // Guardar en sessionStorage
+        let aptitudes = JSON.parse(sessionStorage.getItem("APTITUD") || "[]");
+        aptitudes.push(aptitud);
+        sessionStorage.setItem("APTITUD", JSON.stringify(aptitudes));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\naptitud("${aptitud}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
+    } else {
+        alert("Por favor, ingresa un nombre de aptitud.");
+    }
+}
