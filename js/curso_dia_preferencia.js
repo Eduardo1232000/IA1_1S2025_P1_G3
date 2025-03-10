@@ -12,9 +12,9 @@ function cargarDatosDesdeSessionStorage() {
     let preferencias = new Set(JSON.parse(sessionStorage.getItem("PREFERENCIA_UNICA") || "[]"));
 
     // Poblar las listas
-    actualizarLista("listaCursosUnicos", [...cursos]);
-    actualizarLista("listaDias", [...dias]);
-    actualizarLista("listaPreferencias", [...preferencias]);
+    actualizarLista("CURSO_UNICO", [...cursos]);
+    actualizarLista("DIA", [...dias]);
+    actualizarLista("PREFERENCIA_UNICA", [...preferencias]);
 }
 
 function actualizarLista(idLista, elementos) {
@@ -49,7 +49,7 @@ function agregarDiaDesdeUI() {
     const dia = inputDia.value.trim(); // Corregido: `dias` a `dia`
 
     if (dia) {
-        let listaDias = document.getElementById("listaDias");
+        let listaDias = document.getElementById("DIA");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -128,7 +128,7 @@ function agregarCursoUnicoDesdeUI() {
     const habilidad = inputCurso.value.trim();
 
     if (habilidad) {
-        let listacursos = document.getElementById("listaCursosUnicos");
+        let listacursos = document.getElementById("CURSO_UNICO");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -166,7 +166,7 @@ function agregarPreferenciaDesdeUI() {
     const inputPreferencia = document.getElementById("inputPreferencia");
     const preferencia = inputPreferencia.value.trim();
     if (preferencia) {
-        let listaPreferencias = document.getElementById("listaPreferencias");
+        let listaPreferencias = document.getElementById("PREFERENCIA_UNICA");
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
         item.textContent = preferencia;

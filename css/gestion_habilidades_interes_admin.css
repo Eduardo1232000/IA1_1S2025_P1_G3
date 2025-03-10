@@ -197,7 +197,7 @@ body.aparecer {
     box-sizing: border-box;
 }
 
-#listaHabilidadesUnicas, #listaIntereses{
+#HABILIDAD_UNICA, #INTERES_UNICO{
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */

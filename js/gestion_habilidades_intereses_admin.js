@@ -11,8 +11,8 @@ function cargarDatosDesdeSessionStorage() {
     let intereses = new Set(JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]"));
 
     // Poblar las listas
-    actualizarLista("listaHabilidadesUnicas", [...habilidades]);
-    actualizarLista("listaIntereses", [...intereses]);
+    actualizarLista("HABILIDAD_UNICA", [...habilidades]);
+    actualizarLista("INTERES_UNICO", [...intereses]);
 }
 
 function actualizarLista(idLista, elementos) {
@@ -47,7 +47,7 @@ function agregarHabilidadDesdeUI() {
     const habilidad = inputHabilidad.value.trim();
 
     if (habilidad) {
-        let listaHabilidades = document.getElementById("listaHabilidadesUnicas");
+        let listaHabilidades = document.getElementById("HABILIDAD_UNICA");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -86,7 +86,7 @@ function agregarInteresDesdeUI() {
     const interes = inputInteres.value.trim();
 
     if (interes) {
-        let listaIntereses = document.getElementById("listaIntereses");
+        let listaIntereses = document.getElementById("INTERES_UNICO");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");

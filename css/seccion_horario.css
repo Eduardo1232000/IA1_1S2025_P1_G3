@@ -197,7 +197,7 @@ body.aparecer {
     box-sizing: border-box;
 }
 
-#listaHora, #listaSeccion {
+#SECCION_UNICO, #HORA {
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */

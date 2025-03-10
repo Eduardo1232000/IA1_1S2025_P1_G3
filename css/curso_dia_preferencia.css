@@ -268,7 +268,7 @@ li {
     background-color: #07480c;
 }
 
-#listaPreferencias, #listaDias, #listaCursosUnicos {
+#PREFERENCIA_UNICA, #DIA, #CURSO_UNICO {
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */

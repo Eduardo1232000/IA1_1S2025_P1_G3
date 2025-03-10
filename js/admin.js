@@ -246,7 +246,7 @@ function actualizarListaDesdeArray(idLista, elementos) {
         btnEliminar.onclick = function () {
             lista.removeChild(item);
             // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar('facultad', texto);  // Por ejemplo, eliminar 'facultad'
+            actualizarPrologDespuésDeEliminar(texto,idLista);  // Por ejemplo, eliminar 'facultad'
         };
         item.appendChild(btnEliminar);
         lista.appendChild(item);

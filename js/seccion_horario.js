@@ -11,8 +11,8 @@ function cargarDatosDesdeSessionStorage() {
     let horas = new Set(JSON.parse(sessionStorage.getItem("HORA") || "[]"));
 
     // Poblar las listas
-    actualizarLista("listaSeccion", [...secciones]);
-    actualizarLista("listaHora", [...horas]);
+    actualizarLista("SECCION_UNICO", [...secciones]);
+    actualizarLista("HORA", [...horas]);
 }
 
 function actualizarLista(idLista, elementos) {
@@ -47,7 +47,7 @@ function agregarSeccionDesdeUI() {
     const seccion = inputSeccion.value.trim();
 
     if (seccion) {
-        let listaSecciones = document.getElementById("listaSeccion");
+        let listaSecciones = document.getElementById("SECCION_UNICO");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -86,7 +86,7 @@ function agregarHoraDesdeUI() {
     const hora = inputHora.value.trim();
 
     if (hora) {
-        let listaHoras = document.getElementById("listaHora");
+        let listaHoras = document.getElementById("HORA");
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
