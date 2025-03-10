@@ -44,11 +44,11 @@ function eliminarElementoDeSessionStorage(elemento, listaId) {
 
 function agregarSeccionDesdeUI() {
     const inputSeccion = document.getElementById("inputSeccion"); // Corregido el ID del input
-    const seccion = inputSeccion.value.trim();
+    let seccion = inputSeccion.value.trim();
 
     if (seccion) {
         let listaSecciones = document.getElementById("SECCION_UNICO");
-
+        seccion = seccion.toUpperCase();
         // Obtener la lista actual de secciones desde sessionStorage
         let secciones = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
 
