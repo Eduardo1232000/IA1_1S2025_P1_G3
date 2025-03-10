@@ -49,7 +49,7 @@ document.getElementById('fileInput').addEventListener('change', function (event)
 
 //   Función para procesar Código Prolog y extraer datos
 function procesarCodigoProlog(codigo) {
-    let facultades = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [], curso_unico_ = [];
+    let curso = [], carreras = [], aptitudes = [], facultadCarrera = [], carreraAptitud = [], curso_unico_ = [];
     let dias = [], horas = [], habilidades_unicas = [], habilidades = [], intereses_unicos = [], intereses = [];
     let preferencias = [], secciones_unicos = [], seccion = [], horarios = [], preferencias_unicas=[], facultad_unico=[], aptitud_unico=[];
     let lineas = codigo.split("\n");
@@ -148,6 +148,9 @@ function procesarCodigoProlog(codigo) {
                 let curso = relacionHorarios[5].replace(/'/g, '').trim();
                 horarios.push({ dia, hora_inicio, hora_fin, seccion, curso });
             }
+        }else if (linea.startsWith("curso(")) {
+            let relacionCarreraCurso = linea.match(/curso\((.*?),\s*(.*?)\)/);
+            if (relacionCarreraCurso) curso.push({ curso: relacionCarreraCurso[1], carrera: relacionCarreraCurso[2] });
         }
     });
 
@@ -171,6 +174,7 @@ function procesarCodigoProlog(codigo) {
     let seccionesUnicasExistentes = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
     let seccionExistente = JSON.parse(sessionStorage.getItem("SECCION") || "[]");
     let horariosExistentes = JSON.parse(sessionStorage.getItem("HORARIO") || "[]");
+    let CarreraCrusoExistente = JSON.parse(sessionStorage.getItem("CURSO") || "[]");
 
     // Solo agregar si no existen datos para evitar duplicados
     facultad_unico = [...new Set([...facultadesUnicasExistentes, ...facultad_unico])];
@@ -192,6 +196,7 @@ function procesarCodigoProlog(codigo) {
     secciones_unicos = [...new Set([...seccionesUnicasExistentes, ...secciones_unicos])];
     seccion = [...new Set([...seccionExistente, ...seccion])];
     horarios = [...new Set([...horariosExistentes, ...horarios])];
+    curso = [...new Set([...CarreraCrusoExistente, ...curso])];
 
     // Guardar todos los datos actualizados en sessionStorage
     sessionStorage.setItem("FACULTAD_UNICO", JSON.stringify(facultad_unico));
@@ -213,6 +218,7 @@ function procesarCodigoProlog(codigo) {
     sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones_unicos));
     sessionStorage.setItem("SECCION", JSON.stringify(seccion));
     sessionStorage.setItem("HORARIO", JSON.stringify(horarios));
+    sessionStorage.setItem("CURSO", JSON.stringify(curso));
 
     // Actualizar la interfaz con los datos
     actualizarListaDesdeArray("FACULTAD_UNICO", [...facultad_unico]);

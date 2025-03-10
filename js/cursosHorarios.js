@@ -4,21 +4,26 @@ window.onload = function () {
 
 function cargarDatosDesdeSessionStorage() {
     let dias = new Set(JSON.parse(sessionStorage.getItem("DIA") || "[]"));
+    let carreras = new Set(JSON.parse(sessionStorage.getItem("CARRERA") || "[]"));
     let cursos = new Set(JSON.parse(sessionStorage.getItem("CURSO_UNICO") || "[]"));
     let horasInicio = new Set(JSON.parse(sessionStorage.getItem("HORA") || "[]"));
     let horasFin = new Set(JSON.parse(sessionStorage.getItem("HORA") || "[]"));
     let secciones = new Set(JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]"));
     let asociacionesCursosHorarios = JSON.parse(sessionStorage.getItem("HORARIO") || "[]"); // Cambio aquí
-
+    let asociacionesCarrerasCursos = JSON.parse(sessionStorage.getItem("CURSO") || "[]"); // Cambio aquí
+    console.log(asociacionesCarrerasCursos)
     // Poblar los select
     poblarSelect("selectDia", [...dias]);
     poblarSelect("selectCurso", [...cursos]);
+    poblarSelect("selectCur", [...cursos]);
+    poblarSelect("selectCar", [...carreras]);
     poblarSelect("selectHoraI", [...horasInicio]);
     poblarSelect("selectHoraF", [...horasFin]);
     poblarSelect("selectSeccion", [...secciones]);
 
     // Actualizar la lista de asociaciones
     actualizarLista("listaAsociacionesFacCarr", asociacionesCursosHorarios, "curso", "seccion");
+    actualizarLista2("listaAsociacionesCarr_Cur", asociacionesCarrerasCursos, "curso", "carrera");
 }
 
 function poblarSelect(id, elementos) {
@@ -44,6 +49,18 @@ function actualizarLista(idLista, asociaciones) {
     });
 }
 
+function actualizarLista2(idLista, asociaciones, clave1, clave2) {
+    let lista = document.getElementById(idLista);
+    if (!lista) return;
+    lista.innerHTML = "";
+    asociaciones.forEach(asoc => {
+        let item = document.createElement("li");
+        console.log(`${asoc[clave1]}`)
+        item.textContent = `${asoc[clave1]} - ${asoc[clave2]}`;
+        lista.appendChild(item);
+    });
+}
+
 function asociarFacultadCarreraDesdeUI() {
     let dia = document.getElementById("selectDia").value;
     let curso = document.getElementById("selectCurso").value;
@@ -55,6 +72,15 @@ function asociarFacultadCarreraDesdeUI() {
         agregarAsociacion(nuevaLinea, "HORARIO");
     } else {
         console.log("Faltan datos para hacer la asociación.");
+    }
+}
+function asociarCarreraCursoDesdeUI() {
+    let carrera = document.getElementById("selectCar").value;
+    let curso = document.getElementById("selectCur").value;
+    if (carrera && curso) {
+        let nuevaLinea = { carrera, curso };
+        console.log(curso)
+        agregarAsociacion(nuevaLinea, "CURSO");
     }
 }
 

@@ -50,7 +50,27 @@
                     <!-- Lista de Asociaciones -->
                     <ul id="listaAsociacionesFacCarr" class="lista-scroll"></ul>
                 </div>
+                <div id="ADMIN_DIV_ASOC_CAR_CUR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Carreras y Cursos</label>
+                    <!-- Select para cursos y horarios -->
+                    <div class="input-container">
+                        <select id="selectCar">
+                            <option value="">Seleccione un Carrera</option>
+                        </select>
+                        <select id="selectCur">
+                            <option value="">Seleccione un Curso</option>
+                        </select>
+                    </div>
 
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarCarreraCursoDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="listaAsociacionesCarr_Cur" class="lista-scroll"></ul>
+                </div>
             </div>
         </div>
     </div>
