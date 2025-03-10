@@ -302,51 +302,63 @@ function agregarFacultadDesdeUI() {
     const facultad = inputFacultad.value.trim();
 
     if (facultad) {
-        // Verificar si ya existe
-        let facultades = JSON.parse(sessionStorage.getItem("FACULTAD_UNICO"));
-        if (!facultades.includes(facultad)) {
-            let listaFacultades = document.getElementById("FACULTAD_UNICO");
+        // Obtener la lista actual de facultades desde sessionStorage
+        let facultades = JSON.parse(sessionStorage.getItem("FACULTAD_UNICO") || "[]");
 
-            // Crear un nuevo elemento de lista
-            let item = document.createElement("li");
-            item.textContent = facultad;
-
-            // Crear botón de eliminar
-            let btnEliminar = document.createElement("button");
-            btnEliminar.textContent = "❌";
-            btnEliminar.onclick = function () {
-                listaFacultades.removeChild(item);
-                // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-                actualizarPrologDespuésDeEliminar(facultad,"FACULTAD_UNICO");
-            };
-
-            item.appendChild(btnEliminar);
-            listaFacultades.appendChild(item);
-
-            // Limpiar el campo de entrada
-            inputFacultad.value = "";
-
-            // Guardar en sessionStorage
-            facultades.push(facultad);
-            sessionStorage.setItem("FACULTAD_UNICO", JSON.stringify(facultades));
-
-            // Actualizar CODIGO_PROLOG
-            let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-            CodigoProlog += `\nfacultad("${facultad}").`;
-            sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-        } else {
-            alert("La facultad ya existe.");
+        // Verificar si la facultad ya existe
+        if (facultades.includes(facultad)) {
+            alert("La facultad ya ha sido agregada.");
+            return;
         }
+
+        let listaFacultades = document.getElementById("FACULTAD_UNICO");
+
+        // Crear un nuevo elemento de lista
+        let item = document.createElement("li");
+        item.textContent = facultad;
+
+        // Crear botón de eliminar
+        let btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "❌";
+        btnEliminar.onclick = function () {
+            listaFacultades.removeChild(item);
+            actualizarPrologDespuésDeEliminar(facultad, "FACULTAD_UNICO");
+        };
+
+        item.appendChild(btnEliminar);
+        listaFacultades.appendChild(item);
+
+        // Limpiar el campo de entrada
+        inputFacultad.value = "";
+
+        // Guardar en sessionStorage
+        facultades.push(facultad);
+        sessionStorage.setItem("FACULTAD_UNICO", JSON.stringify(facultades));
+
+        // Actualizar CODIGO_PROLOG
+        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+        CodigoProlog += `\nfacultad("${facultad}").`;
+        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
     } else {
         alert("Por favor, ingresa un nombre de facultad.");
     }
 }
+
 
 function agregarCarreraDesdeUI() {
     const inputCarrera = document.getElementById("inputCarrera");
     const carrera = inputCarrera.value.trim();
 
     if (carrera) {
+        // Obtener la lista actual de carreras desde sessionStorage
+        let carreras = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
+
+        // Verificar si la carrera ya existe
+        if (carreras.includes(carrera)) {
+            alert("La carrera ya ha sido agregada.");
+            return;
+        }
+
         let listaCarreras = document.getElementById("CARRERA");
 
         // Crear un nuevo elemento de lista
@@ -358,8 +370,7 @@ function agregarCarreraDesdeUI() {
         btnEliminar.textContent = "❌";
         btnEliminar.onclick = function () {
             listaCarreras.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
-            actualizarPrologDespuésDeEliminar(carrera,"CARRERA");
+            actualizarPrologDespuésDeEliminar(carrera, "CARRERA");
         };
 
         item.appendChild(btnEliminar);
@@ -369,7 +380,6 @@ function agregarCarreraDesdeUI() {
         inputCarrera.value = "";
 
         // Guardar en sessionStorage
-        let carreras = JSON.parse(sessionStorage.getItem("CARRERA") || "[]");
         carreras.push(carrera);
         sessionStorage.setItem("CARRERA", JSON.stringify(carreras));
 
@@ -387,6 +397,15 @@ function agregarAptitudDesdeUI() {
     const aptitud = inputAptitud.value.trim();
 
     if (aptitud) {
+        // Obtener la lista actual de aptitudes desde sessionStorage
+        let aptitudes = JSON.parse(sessionStorage.getItem("APTITUD_UNICO") || "[]");
+
+        // Verificar si la aptitud ya existe
+        if (aptitudes.includes(aptitud)) {
+            alert("La aptitud ya ha sido agregada.");
+            return;
+        }
+
         let listaAptitudes = document.getElementById("APTITUD_UNICO");
 
         // Crear un nuevo elemento de lista
@@ -398,7 +417,6 @@ function agregarAptitudDesdeUI() {
         btnEliminar.textContent = "❌";
         btnEliminar.onclick = function () {
             listaAptitudes.removeChild(item);
-            // Eliminar también de sessionStorage y actualizar Prolog después de eliminar
             actualizarPrologDespuésDeEliminar(aptitud, "APTITUD_UNICO");
         };
 
@@ -409,7 +427,6 @@ function agregarAptitudDesdeUI() {
         inputAptitud.value = "";
 
         // Guardar en sessionStorage
-        let aptitudes = JSON.parse(sessionStorage.getItem("APTITUD_UNICO") || "[]");
         aptitudes.push(aptitud);
         sessionStorage.setItem("APTITUD_UNICO", JSON.stringify(aptitudes));
 

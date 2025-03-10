@@ -47,6 +47,15 @@ function agregarHabilidadDesdeUI() {
     const habilidad = inputHabilidad.value.trim();
 
     if (habilidad) {
+        // Obtener la lista actual de habilidades desde sessionStorage
+        let habilidades = JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA") || "[]");
+
+        // Verificar si la habilidad ya existe
+        if (habilidades.includes(habilidad)) {
+            alert("La habilidad ya ha sido agregada.");
+            return;
+        }
+
         let listaHabilidades = document.getElementById("HABILIDAD_UNICA");
 
         // Crear un nuevo elemento de lista
@@ -68,7 +77,6 @@ function agregarHabilidadDesdeUI() {
         inputHabilidad.value = "";
 
         // Guardar en sessionStorage
-        let habilidades = JSON.parse(sessionStorage.getItem("HABILIDAD_UNICA") || "[]");
         habilidades.push(habilidad);
         sessionStorage.setItem("HABILIDAD_UNICA", JSON.stringify(habilidades));
 
@@ -81,12 +89,22 @@ function agregarHabilidadDesdeUI() {
     }
 }
 
+
 function agregarInteresDesdeUI() {
-    const inputInteres = document.getElementById("inputCarrera");
+    const inputInteres = document.getElementById("inputInteres"); // Corregido el ID del input
     const interes = inputInteres.value.trim();
 
     if (interes) {
         let listaIntereses = document.getElementById("INTERES_UNICO");
+
+        // Obtener la lista actual de intereses desde sessionStorage
+        let intereses = JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]");
+
+        // Verificar si el interés ya existe
+        if (intereses.includes(interes)) {
+            alert("Este interés ya ha sido agregado.");
+            return;
+        }
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -107,7 +125,6 @@ function agregarInteresDesdeUI() {
         inputInteres.value = "";
 
         // Guardar en sessionStorage
-        let intereses = JSON.parse(sessionStorage.getItem("INTERES_UNICO") || "[]");
         intereses.push(interes);
         sessionStorage.setItem("INTERES_UNICO", JSON.stringify(intereses));
 
@@ -119,6 +136,8 @@ function agregarInteresDesdeUI() {
         alert("Por favor, ingresa el nombre del interés.");
     }
 }
+
+
 
 function AccionSiguiente() {
     console.log("Datos guardados en sessionStorage");

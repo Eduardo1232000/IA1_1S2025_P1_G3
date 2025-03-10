@@ -43,11 +43,20 @@ function eliminarElementoDeSessionStorage(elemento, listaId) {
 }
 
 function agregarSeccionDesdeUI() {
-    const inputSeccion = document.getElementById("inputFacultad");
+    const inputSeccion = document.getElementById("inputSeccion"); // Corregido el ID del input
     const seccion = inputSeccion.value.trim();
 
     if (seccion) {
         let listaSecciones = document.getElementById("SECCION_UNICO");
+
+        // Obtener la lista actual de secciones desde sessionStorage
+        let secciones = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
+
+        // Verificar si la sección ya existe
+        if (secciones.includes(seccion)) {
+            alert("Esta sección ya ha sido agregada.");
+            return;
+        }
 
         // Crear un nuevo elemento de lista
         let item = document.createElement("li");
@@ -68,7 +77,6 @@ function agregarSeccionDesdeUI() {
         inputSeccion.value = "";
 
         // Guardar en sessionStorage
-        let secciones = JSON.parse(sessionStorage.getItem("SECCION_UNICO") || "[]");
         secciones.push(seccion);
         sessionStorage.setItem("SECCION_UNICO", JSON.stringify(secciones));
 
@@ -81,44 +89,57 @@ function agregarSeccionDesdeUI() {
     }
 }
 
+
 function agregarHoraDesdeUI() {
-    const inputHora = document.getElementById("inputCarrera");
+    const inputHora = document.getElementById("inputHora");
     const hora = inputHora.value.trim();
 
-    if (hora) {
-        let listaHoras = document.getElementById("HORA");
+    // Expresión regular para validar formato 24 horas (HH:MM)
+    const regexHora = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
-        // Crear un nuevo elemento de lista
-        let item = document.createElement("li");
-        item.textContent = hora;
-
-        // Crear botón de eliminar
-        let btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.onclick = function () {
-            listaHoras.removeChild(item);
-            eliminarElementoDeSessionStorage(hora, "HORA");
-        };
-
-        item.appendChild(btnEliminar);
-        listaHoras.appendChild(item);
-
-        // Limpiar el campo de entrada
-        inputHora.value = "";
-
-        // Guardar en sessionStorage
-        let horas = JSON.parse(sessionStorage.getItem("HORA") || "[]");
-        horas.push(hora);
-        sessionStorage.setItem("HORA", JSON.stringify(horas));
-
-        // Actualizar CODIGO_PROLOG
-        let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
-        CodigoProlog += `\nhora("${hora}").`;
-        sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
-    } else {
-        alert("Por favor, ingresa la hora.");
+    if (!regexHora.test(hora)) {
+        alert("Por favor, ingresa una hora válida en formato 24 horas (HH:MM).");
+        return;
     }
+
+    let listaHoras = document.getElementById("HORA");
+
+    // Verificar si la hora ya existe en la lista
+    let horas = JSON.parse(sessionStorage.getItem("HORA") || "[]");
+    if (horas.includes(hora)) {
+        alert("Esta hora ya ha sido agregada.");
+        return;
+    }
+
+    // Crear un nuevo elemento de lista
+    let item = document.createElement("li");
+    item.textContent = hora;
+
+    // Crear botón de eliminar
+    let btnEliminar = document.createElement("button");
+    btnEliminar.textContent = "❌";
+    btnEliminar.onclick = function () {
+        listaHoras.removeChild(item);
+        eliminarElementoDeSessionStorage(hora, "HORA");
+    };
+
+    item.appendChild(btnEliminar);
+    listaHoras.appendChild(item);
+
+    // Limpiar el campo de entrada
+    inputHora.value = "";
+
+    // Guardar en sessionStorage
+    horas.push(hora);
+    sessionStorage.setItem("HORA", JSON.stringify(horas));
+
+    // Actualizar CODIGO_PROLOG
+    let CodigoProlog = sessionStorage.getItem("CODIGO_PROLOG") || "";
+    CodigoProlog += `\nhora("${hora}").`;
+    sessionStorage.setItem("CODIGO_PROLOG", CodigoProlog);
 }
+
+
 
 function AccionSiguiente() {
     console.log("Datos guardados en sessionStorage");
