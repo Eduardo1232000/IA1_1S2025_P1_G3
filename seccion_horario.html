@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1 - IA</title>
+    <script src="js/tau-prolog.js"></script>
+    <link rel="stylesheet" href="css/seccion_horario.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body class="tema_anaranjado">
+    <div id='CUADRO_GRANDE_ADMIN'>
+        <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('index.html');"> Salir</button>
+        <hr id="ADMIN_LINEA_TITULO">
+        <label id="ADMIN_TITULO">Secciones y Horas</label>
+        <div id="ADMIN_DIV">
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('curso_dia_preferencia.html');"> Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('Gestion_habilidades_intereses_admin.html');"> Regresar</button>
+            <hr id="ADMIN_LINEA_TEXTO1">
+            <hr id="ADMIN_LINEA_TEXTO2">
+
+            <!-- Habilidades -->
+            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Seccion</label>
+            <div id="ADMIN_DIV_FACULTADES">
+                <div class="input-container">
+                    <input type="text" id="inputSeccion" placeholder="Nombre de la sección">
+                    <button onclick="agregarSeccionDesdeUI()">Agregar</button>
+                    <!-- <button onclick="agregarFacultadDesdeUI()">Agregar</button> -->
+                </div>
+                <ul id="SECCION_UNICO" class="lista-scroll"></ul>
+            </div>
+
+            <!-- Intereses -->
+            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Hora</label>
+            <div id="ADMIN_DIV_CARRERAS">
+                <div class="input-container">
+                    <input type="text" id="inputHora" placeholder="Hora">
+                    <button onclick="agregarHoraDesdeUI()">Agregar</button>
+                    <!-- <button onclick="agregarCarreraDesdeUI()">Agregar</button> -->
+                </div>
+                <ul id="HORA" class="lista-scroll"></ul>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/seccion_horario.js"></script> 
+</body>
+</html>

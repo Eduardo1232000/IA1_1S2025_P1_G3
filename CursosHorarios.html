@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asociaciones - IA</title>
+    <script src="js/tau-prolog.js"></script>
+    <link rel="stylesheet" href="css/cursos_horarios.css">
+</head>
+<body class="tema_anaranjado">
+    <div id='CUADRO_GRANDE_ADMIN'>
+        <button id='BOTON_REGRESAR_HOME' class="BOTON" onclick="redirigir('index.html');">Salir</button>
+        <hr id="ADMIN_LINEA_TITULO">
+        <label id="ADMIN_TITULO">Asociar Horarios</label>
+
+        <div id="ADMIN_DIV">
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente()">Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('asociaciones_carrera_admin.html');"> Regresar</button>
+
+
+            <div id="ADMIN_DIV_ASOC_HORIZONTAL">
+                <!-- Sección de Asociación cursos y horarios-->
+                <div id="ADMIN_DIV_ASOC_FAC_CAR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Cursos, Hora y Sección</label>
+                    <!-- Select para cursos y horarios -->
+                    <div class="input-container">
+                        <select id="selectDia">
+                            <option value="">Seleccione un Día</option>
+                        </select>
+                        <select id="selectCurso">
+                            <option value="">Seleccione un Curso</option>
+                        </select>
+                        <select id="selectHoraI">
+                            <option value="">Seleccione una Hora Inicio</option>
+                        </select>
+                        <select id="selectHoraF">
+                            <option value="">Seleccione una Hora Fin</option>
+                        </select>
+                        <select id="selectSeccion">
+                            <option value="">Seleccione una Sección</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarFacultadCarreraDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="HORARIO" class="lista-scroll"></ul>
+                </div>
+                <div id="ADMIN_DIV_ASOC_CAR_CUR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Carreras y Cursos</label>
+                    <!-- Select para cursos y horarios -->
+                    <div class="input-container">
+                        <select id="selectCar">
+                            <option value="">Seleccione un Carrera</option>
+                        </select>
+                        <select id="selectCur">
+                            <option value="">Seleccione un Curso</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarCarreraCursoDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="CURSO" class="lista-scroll"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/cursosHorarios.js"></script> 
+</body>
+</html>

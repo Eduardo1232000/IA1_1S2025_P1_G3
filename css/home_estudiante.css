@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(120deg, #57C3C8 40%, #0B4249 50%),
+        radial-gradient(circle, #0B4249 10%, transparent 60%);
+    background-blend-mode: screen;
+
+    opacity: 0;                             /* PARA TRANSICION DE ENTRADA */
+    transition: opacity 0.5s ease-in-out;
+}
+body.aparecer {
+    opacity: 1;
+}
+#CUADRO_GRANDE{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: radial-gradient(circle, transparent 10%, #062243 70%);
+    background-color: #1c3b82;
+    border-radius: 10px;
+    width: 90%; 
+    height: 90vh; 
+    transition: all 0.5s ease; 
+}
+.DESCRIPCION{
+    position: absolute;
+    font-size: 3vh;
+    color: white;
+}
+.BOTON{
+    position: absolute;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-color: transparent;
+    cursor: pointer;
+    transition: 500ms;
+}
+#BOTON_REGRESAR_HOME{
+    top: 3%;
+    left: 1%;
+    width: 15vh;
+    height: 8vh;
+    background-color: #802525;
+}
+#BOTON_REGRESAR_HOME:hover{
+    background-color: #4d0d0d;
+}
+#HOME_ESTUDIANTE_BOTON_HORARIO{
+    top: 50%;
+    left: 23%;
+    width: 30vh;
+    height: 10vh;
+    background-color: #806e25;
+}
+#HOME_ESTUDIANTE_BOTON_HORARIO:hover{
+    background-color: #594a0e;
+}
+#HOME_ESTUDIANTE_BOTON_ANALISIS{
+    top: 50%;
+    left: 62%;
+    width: 30vh;
+    height: 10vh;
+    background-color: #712580;
+}
+#HOME_ESTUDIANTE_BOTON_ANALISIS:hover{
+    background-color: #440e4f;
+}
+#HOME_ESTUDIANTE_DESCRIPCION1{
+    width: 50%;
+    left: 40%;
+    top: 20%;
+}
+#HOME_ESTUDIANTE_TEXTO1{
+    top: 35%;
+    left: 15%;
+    width: 30%;
+    text-align: center;
+
+}
+#HOME_ESTUDIANTE_TEXTO2{
+    top: 35%;
+    left: 55%;
+    width: 30%;
+    text-align: center;
+}
+#HOME_ESTUDIANTE_LINEA_TEXTO1{
+    position: absolute;
+    top: 45%;
+    left: 15%;
+    width: 30%;
+}
+#HOME_ESTUDIANTE_LINEA_TEXTO2{
+    position: absolute;
+    top: 45%;
+    left: 55%;
+    width: 30%;
+}
+#HOME_ESTUDIANTE_TITULO{
+    position: absolute;
+    width: 20%;
+    left: 38%;
+    top: 2%;
+    font-size: 10vh;
+    font-weight: bold;
+    color: white;
+}
+#HOME_ESTUDIANTE_LINEA_TITULO{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+}

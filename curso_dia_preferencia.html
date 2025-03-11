@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1 - IA</title>
+    <script src="js/tau-prolog.js"></script>
+    <link rel="stylesheet" href="css/curso_dia_preferencia.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body class="tema_anaranjado">
+    <div id='CUADRO_GRANDE_ADMIN'>
+        <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('index.html');"> Salir</button>
+        <hr id="ADMIN_LINEA_TITULO">
+        <label id="ADMIN_TITULO">Cursos, Preferencias y Días</label>
+        <div id="ADMIN_DIV">
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('asociacion_admin.html');"> Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('seccion_horario.html');"> Anterior</button>
+            <hr id="ADMIN_LINEA_TEXTO1">
+            <!-- Cursos -->
+            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Cursos</label>
+            <div id="ADMIN_DIV_FACULTADES">
+                <div class="input-container">
+                    <input type="text" id="inputCurso" placeholder="Nombre del Curso">
+                    <button onclick="agregarCursoUnicoDesdeUI()">Agregar</button>
+                </div>
+                <ul id="CURSO_UNICO" class="lista-scroll"></ul>
+            </div>
+
+            <!-- Carreras -->
+            <hr id="ADMIN_LINEA_TEXTO2">
+            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Preferencias</label>
+            <div id="ADMIN_DIV_CARRERAS">
+                <div class="input-container">
+                    <input type="text" id="inputPreferencia" placeholder="Nombre de la Preferencia">
+                    <button onclick="agregarPreferenciaDesdeUI()">Agregar</button>
+                </div>
+                <ul id="PREFERENCIA_UNICA" class="lista-scroll"></ul>
+            </div>
+
+            <!-- Aptitudes -->
+            <hr id="ADMIN_LINEA_TEXTO3">
+            <label id="ADMIN_TEXTO3" class="DESCRIPCION">Días</label>
+            <div id="ADMIN_DIV_APTITUDES">
+                <div class="input-container">
+                    <input type="text" id="inputDia" placeholder="Nombre de la Aptitud">
+                    <button onclick="agregarDiaDesdeUI()">Agregar</button>
+                </div>
+                <ul id="DIA" class="lista-scroll"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/curso_dia_preferencia.js"></script> 
+</body>
+</html>

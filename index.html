@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1 - IA</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id='CUADRO_MEDIANO'>
+        <button id='INDEX_BOTON_ESTUDIANTE'class="BOTON" onclick="redirigir('Home_estudiante.html')">Estudiante</button>
+        <button id='INDEX_BOTON_ADMIN'class="BOTON" onclick="abriremergente()">Administrador</button>   
+        <label id="INDEX_TITULO">Unimatch</label>
+        <label id="INDEX_DESCRIPCION"class="DESCRIPCION">
+            Bienvenido a Unimatch, el sistema inteligente que le ayudará a realizar la mejor elección de su carrera universitaria.
+        </label>
+        <hr id="INDEX_LINEA">    
+    </div>
+    <div id="miemergente" class="emergente">
+        <div class="emergente-content">
+            <h3>Ingrese la contraseña para continuar</h3>
+            <input type="text" id="usuario_input" placeholder="Usuario">
+            <input type="password" id="password_input" placeholder="Contraseña">
+            <button id="EMERGENTE_BOTON_CANCELAR" onclick="cancelar()">Cancelar</button>
+            <button id="EMERGENTE_BOTON_ACEPTAR"onclick="verificarPassword()">Aceptar</button> 
+        </div>
+    </div>    
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/index.js"></script> 
+</body>
+</html>

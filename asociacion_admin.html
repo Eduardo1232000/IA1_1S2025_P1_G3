@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asociaciones - IA</title>
+    <script src="js/tau-prolog.js"></script>
+    <link rel="stylesheet" href="css/asociacion_admin.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body class="tema_anaranjado">
+    <div id='CUADRO_GRANDE_ADMIN'>
+        <button id='BOTON_REGRESAR_HOME' class="BOTON" onclick="redirigir('index.html');">Salir</button>
+        <hr id="ADMIN_LINEA_TITULO">
+        <label id="ADMIN_TITULO">Asociaciones</label>
+
+        <div id="ADMIN_DIV">
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('asociaciones_carrera_admin.html');"> Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('curso_dia_preferencia.html');"> Regresar</button>
+
+            <!-- Sección de Asociación Facultad - Carrera y Asociación Carrera - Aptitud -->
+            <div id="ADMIN_DIV_ASOC_HORIZONTAL">
+                <!-- Sección de Asociación Facultad - Carrera -->
+                <div id="ADMIN_DIV_ASOC_FAC_CAR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Facultad con Carrera</label>
+
+                    <!-- Select para Facultad y Carrera -->
+                    <div class="input-container">
+                        <select id="selectFacultad">
+                            <option value="">Seleccione una facultad</option>
+                        </select>
+                        <select id="selectCarrera">
+                            <option value="">Seleccione una carrera</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarFacultadCarreraDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="FACULTAD" class="lista-scroll"></ul>
+                </div>
+
+                <div id="ADMIN_DIV_ASOC_PREF_CAR">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO1" class="DESCRIPCION">Asociar Preferencia con Carrera</label>
+
+                    <!-- Select para Preferencia y Carrera -->
+                    <div class="input-container">
+                        <select id="selectPreferencia">
+                            <option value="">Seleccione una Preferencia</option>
+                        </select>
+                        <select id="selectCarreraPrf">
+                            <option value="">Seleccione una carrera</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarCarreraPreferenciaDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="PREFERENCIA" class="lista-scroll"></ul>
+                </div>
+
+                <!-- Sección de Asociación Carrera - Aptitud -->
+                <div id="ADMIN_DIV_ASOC_CAR_APT">
+                    <!-- Título -->
+                    <label id="ADMIN_TEXTO2" class="DESCRIPCION">Asociar Carrera con Aptitud</label>
+
+                    <!-- Select para Carrera y Aptitud -->
+                    <div class="input-container">
+                        <select id="selectCarreraApt">
+                            <option value="">Seleccione una carrera</option>
+                        </select>
+                        <select id="selectAptitud">
+                            <option value="">Seleccione una aptitud</option>
+                        </select>
+                    </div>
+
+                    <!-- Botón de Asociación -->
+                    <div class="input-container">
+                        <button class="BOTON_ASOCIAR" onclick="asociarCarreraAptitudDesdeUI()">Asociar</button>
+                    </div>
+
+                    <!-- Lista de Asociaciones -->
+                    <ul id="APTITUD" class="lista-scroll"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/AsociacionAdmin.js"></script> 
+</body>
+</html>
