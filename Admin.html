@@ -6,49 +6,85 @@
     <title>Proyecto1 - IA</title>
     <script src="js/tau-prolog.js"></script>
     <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body class="tema_anaranjado">
     <div id='CUADRO_GRANDE_ADMIN'>
         <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('index.html');"> Salir</button>
         <hr id="ADMIN_LINEA_TITULO">
-        <label id="ADMIN_TITULO">Administracion</label>
+        <label id="ADMIN_TITULO">Administración</label>
         <label id="TEXTO_PROLOG">Prolog</label>
         <label id="STATUS_PROLOG"></label>
         <div id="ADMIN_DIV">
-            <button id='ADMIN_BOTON_SIGUIENTE'class="BOTON"onclick="AccionSiguiente()"> Siguiente</button>
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('Gestion_habilidades_intereses_admin.html');"> Siguiente</button>
             <hr id="ADMIN_LINEA_TEXTO1">
             <hr id="ADMIN_LINEA_TEXTO2">
             <hr id="ADMIN_LINEA_TEXTO3">
 
-            <label for="fileInput"id="ADMIN_TEXTO_ARCHIVO">Cargar archivo Prolog:</label>
+            <label for="fileInput" id="ADMIN_TEXTO_ARCHIVO">Cargar archivo Prolog:</label>
             <input type="file" id="fileInput" accept=".pl">
 
-            <label id="ADMIN_DESCRIPCION1"class="DESCRIPCION">
-                Administracion y Configuracion general del sistema
+            <label for="downloadButton" id="ADMIN_TEXTO_DESCAR">Descargar archivo Prolog:</label>
+            <button id="downloadButton">Descargar</button>
+
+            <label id="ADMIN_DESCRIPCION1" class="DESCRIPCION">
+                Administración y Configuración general del sistema
             </label>
-            <label id="ADMIN_TEXTO1"class="DESCRIPCION">
-                Facultades
-            </label>
-            <label id="ADMIN_TEXTO2"class="DESCRIPCION">
-                Carreras
-            </label>
-            <label id="ADMIN_TEXTO3"class="DESCRIPCION">
-                Aptitudes
-            </label>
-            
-            
+
+            <!-- Facultades -->
+            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Facultades</label>
             <div id="ADMIN_DIV_FACULTADES">
-
+                <div class="input-container">
+                    <input type="text" id="inputFacultad" placeholder="Nombre de la Facultad">
+                    <button onclick="agregarFacultadDesdeUI()">Agregar</button>
+                </div>
+                <ul id="FACULTAD_UNICO" class="lista-scroll"></ul>
             </div>
+
+            <!-- Carreras -->
+            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Carreras</label>
             <div id="ADMIN_DIV_CARRERAS">
-
+                <div class="input-container">
+                    <input type="text" id="inputCarrera" placeholder="Nombre de la Carrera">
+                    <button onclick="agregarCarreraDesdeUI()">Agregar</button>
+                </div>
+                <ul id="CARRERA" class="lista-scroll"></ul>
             </div>
-            <div id="ADMIN_DIV_APTITUDES">
 
+            <!-- Aptitudes -->
+            <label id="ADMIN_TEXTO3" class="DESCRIPCION">Aptitudes</label>
+            <div id="ADMIN_DIV_APTITUDES">
+                <div class="input-container">
+                    <input type="text" id="inputAptitud" placeholder="Nombre de la Aptitud">
+                    <button onclick="agregarAptitudDesdeUI()">Agregar</button>
+                </div>
+                <ul id="APTITUD_UNICO" class="lista-scroll"></ul>
             </div>
         </div>
     </div>
     <script src="js/animacion_y_navegacion.js"></script> 
     <script src="js/Admin.js"></script> 
+    <script src="js/cargardesdeUI.js"></script> 
 </body>
 </html>

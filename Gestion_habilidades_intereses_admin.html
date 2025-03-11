@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1 - IA</title>
+    <script src="js/tau-prolog.js"></script>
+    <link rel="stylesheet" href="css/gestion_habilidades_interes_admin.css">
+    <style>
+        /* Ajuste para listas con scroll */
+        .lista-scroll {
+            max-height: 150px; /* Altura máxima antes de mostrar scroll */
+            overflow-y: auto; /* Barra de desplazamiento vertical */
+            border: 1px solid #ccc; /* Borde para mejor visibilidad */
+            padding: 5px;
+            margin-top: 5px;
+            background: #fff;
+        }
+
+        /* Ajuste para los inputs y botones */
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .input-container input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body class="tema_anaranjado">
+    <div id='CUADRO_GRANDE_ADMIN'>
+        <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('index.html');"> Salir</button>
+        <hr id="ADMIN_LINEA_TITULO">
+        <label id="ADMIN_TITULO">Habilidades - Interes</label>
+        <div id="ADMIN_DIV">
+            <button id='ADMIN_BOTON_SIGUIENTE' class="BOTON" onclick="AccionSiguiente(); redirigir('seccion_horario.html');"> Siguiente</button>
+            <button id='ADMIN_BOTON_ATRAS' class="BOTON" onclick="AccionSiguiente(); redirigir('Admin.html');"> Regresar</button>
+            <hr id="ADMIN_LINEA_TEXTO1">
+            <hr id="ADMIN_LINEA_TEXTO2">
+
+            <!-- Habilidades -->
+            <label id="ADMIN_TEXTO1" class="DESCRIPCION">Habilidades</label>
+            <div id="ADMIN_DIV_FACULTADES">
+                <div class="input-container">
+                    <input type="text" id="inputHabilidad" placeholder="Nombre de la Habilidad">
+                    <button onclick="agregarHabilidadDesdeUI()">Agregar</button>
+                    <!-- <button onclick="agregarFacultadDesdeUI()">Agregar</button> -->
+                </div>
+                <ul id="HABILIDAD_UNICA" class="lista-scroll"></ul>
+            </div>
+
+            <!-- Intereses -->
+            <label id="ADMIN_TEXTO2" class="DESCRIPCION">Intereses</label>
+            <div id="ADMIN_DIV_CARRERAS">
+                <div class="input-container">
+                    <input type="text" id="inputInteres" placeholder="Nombre del Interes">
+                    <button onclick="agregarInteresDesdeUI()">Agregar</button>
+                    <!-- <button onclick="agregarCarreraDesdeUI()">Agregar</button> -->
+                </div>
+                <ul id="INTERES_UNICO" class="lista-scroll"></ul>
+            </div>
+
+        </div>
+    </div>
+    <script src="js/animacion_y_navegacion.js"></script> 
+    <script src="js/gestion_habilidades_intereses_admin.js"></script> 
+</body>
+</html>

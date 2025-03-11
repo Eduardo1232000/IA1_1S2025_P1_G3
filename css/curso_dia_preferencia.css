@@ -43,7 +43,7 @@ body.aparecer {
 }
 #ADMIN_DIV_FACULTADES{
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 3%;
     width: 25%;
     height: 50%;
@@ -51,7 +51,7 @@ body.aparecer {
 }
 #ADMIN_DIV_CARRERAS{
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 31%;
     width: 32%;
     height: 50%;
@@ -59,7 +59,7 @@ body.aparecer {
 }
 #ADMIN_DIV_APTITUDES{
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 66%;
     width: 31%;
     height: 50%;
@@ -99,8 +99,8 @@ body.aparecer {
 }
 #ADMIN_TITULO{
     position: absolute;
-    width: 20%;
-    left: 33%;
+    width: 80%;
+    left: 20%;
     top: 2%;
     font-size: 10vh;
     font-weight: bold;
@@ -112,20 +112,20 @@ body.aparecer {
     top: 0%;
 }
 #ADMIN_TEXTO1{
-    top: 25%;
+    top: 15%;
     left: 5%;
     width: 20%;
     text-align: center;
 
 }
 #ADMIN_TEXTO2{
-    top: 25%;
+    top: 15%;
     left: 32%;
     width: 30%;
     text-align: center;
 }
 #ADMIN_TEXTO3{
-    top: 25%;
+    top: 15%;
     left: 66%;
     width: 30%;
     text-align: center;
@@ -138,19 +138,19 @@ body.aparecer {
 }
 #ADMIN_LINEA_TEXTO1{
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 3%;
     width: 25%;
 }
 #ADMIN_LINEA_TEXTO2{
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 31%;
     width: 32%;
 }
 #ADMIN_LINEA_TEXTO3{
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 66%;
     width: 31%;
 }
@@ -211,7 +211,7 @@ body.aparecer {
     box-sizing: border-box;
 }
 
-#FACULTAD_UNICO, #CARRERA, #APTITUD_UNICO {
+#listaFacultades, #listaCarreras, #listaAptitudes {
     flex-grow: 1;
     overflow-y: auto; /* Permite el desplazamiento vertical */
     max-height: 80%; /* Evita que la lista se desborde */
@@ -253,4 +253,24 @@ li {
     width: 300px; /* Fija el ancho */
     margin: 10px auto; /* Centra horizontalmente */
     display: block;
+}
+
+#ADMIN_BOTON_ATRAS{
+    top: 90%;
+    left: 75%;
+    width: 8%;
+    height: 7%;
+    font-size: 2vh;
+    background-color: #17671d;
+    border-radius: 12px;
+}
+#ADMIN_BOTON_ATRAS:hover{
+    background-color: #07480c;
+}
+
+#PREFERENCIA_UNICA, #DIA, #CURSO_UNICO {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    max-height: 80%; /* Evita que la lista se desborde */
+    width: 100%;
 }
