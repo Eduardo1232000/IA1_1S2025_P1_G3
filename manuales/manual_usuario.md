@@ -30,6 +30,9 @@ Al ingresar al sistema, se verá una pantalla de bienvenida con información gen
     - Si no eres administrador y solo deseas acceder como estudiante, selecciona la opción de estudiante sin necesidad de credenciales.
 
 # Imagenes del módulo de inicio
+![Imagen cliente](img/1.jpg)
+![Imagen resultados](img/2.jpg)
+![Imagen resultados_2](img/3.jpg)
 
 
 # Módulo de Estudiantes
