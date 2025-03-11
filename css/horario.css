@@ -136,16 +136,16 @@ body.aparecer {
 #HORARIO_DIV_SELECCIONADOS{
     position: absolute;
     top: 35%;
-    left: 60%;
-    width: 30%;
+    right: 2%;
+    width: 45%;
     height: 40%;
     background-color: white;
 }
 #HORARIO_DIV_CURSOS{
     position: absolute;
     top: 35%;
-    left: 10%;
-    width: 30%;
+    left: 2%;
+    width: 45%;
     height: 40%;
     background-color: white;
 }
@@ -168,4 +168,50 @@ body.aparecer {
 }
 #HORARIO_BOTON_ACEPTAR:hover{
     background-color: #07480c;
+}
+
+.cursosdisponibles {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: auto;
+    margin: 5px;
+}
+
+.divseleccionados {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: auto;
+    margin: 5px;
+}   
+
+.deleteButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.deleteButton:hover {
+    background-color: #b31106;
+}
+
+.addButton {
+    background-color: #49ac4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.addButton:hover {
+    background-color: #2e8132;
 }
