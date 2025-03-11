@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto1 - IA</title>
-    <script src="js/tau-prolog.js"></script>
-    <link rel="stylesheet" href="css/horario.css">
+  <meta charset="UTF-8">
+  <title>Proyecto1 - IA</title>
+  <script src="js/tau-prolog.js"></script>
+  <link rel="stylesheet" href="css/horario.css">
 </head>
 <body>
-    <div id='CUADRO_GRANDE'>
-        <button id='BOTON_REGRESAR_HOME'class="BOTON" onclick="redirigir('Home_estudiante.html');"> Salir</button>
-        <label id="HORARIO_TITULO">Bienvenido</label>
-        <hr id="HORARIO_LINEA_TITULO">
-        <div id="HORARIO_DIV_PARTE1">
-            <button id='HORARIO_BOTON_SIGUIENTE'class="BOTON"onclick="sugerir()"> Sugerir</button>
-            <label id="HORARIO_DESCRIPCION1"class="DESCRIPCION">Ingresa los datos solicitados y descubre tu horario adecuado</label>
-            <label id="HORARIO_TEXTO_CURSO"class="DESCRIPCION">Cursos</label>
-            <label id="HORARIO_TEXTO_SELECCIONADO"class="DESCRIPCION">Seleccionados</label>
-            <hr id="HORARIO_LINEA_TEXTO1">
-            <hr id="HORARIO_LINEA_TEXTO2">
-            <div id="HORARIO_DIV_CURSOS">
+  <div id="CUADRO_GRANDE">
+    <button id="BOTON_REGRESAR_HOME" class="BOTON" onclick="redirigir('Home_estudiante.html');"> Salir</button>
+    <label id="HORARIO_TITULO">Bienvenido</label>
+    <hr id="HORARIO_LINEA_TITULO">
 
-            </div>
-            <div id="HORARIO_DIV_SELECCIONADOS">
+    <div id="HORARIO_DIV_PARTE1">
+      <button id="HORARIO_BOTON_SIGUIENTE" class="BOTON" onclick="sugerir()"> Sugerir</button>
+      <label id="HORARIO_DESCRIPCION1" class="DESCRIPCION">
+        Ingresa los datos solicitados y descubre tu horario adecuado
+      </label>
 
-            </div>
-        </div>
-        <div id="HORARIO_DIV_PARTE2"class="oculto">
-            <button id='HORARIO_BOTON_ACEPTAR'class="BOTON"onclick="redirigir('Home_estudiante.html')"> Aceptar</button>
-            <label id="HORARIO_DESCRIPCION1"class="DESCRIPCION">
-                Hemos concluido con el analisis, este es el horario mas adecuado para tus cursos.
-            </label>
-            <div id="HORARIO_DIV">
+      <label id="HORARIO_TEXTO_CURSO" class="DESCRIPCION">Cursos</label>
+      <label id="HORARIO_TEXTO_SELECCIONADO" class="DESCRIPCION">Seleccionados</label>
+      <hr id="HORARIO_LINEA_TEXTO1">
+      <hr id="HORARIO_LINEA_TEXTO2">
 
-            </div>
-        </div>
+      <div class="cursosdisponibles" id="HORARIO_DIV_CURSOS"></div>
+
+      <div class="divseleccionados" id="HORARIO_DIV_SELECCIONADOS"></div>
+      
     </div>
-    <script src="js/animacion_y_navegacion.js"></script> 
-    <script src="js/horario.js"></script> 
+
+    <div id="HORARIO_DIV_PARTE2" class="oculto">
+      <button id="HORARIO_BOTON_ACEPTAR" class="BOTON" onclick="redirigir('Home_estudiante.html')"> Aceptar</button>
+      <label id="HORARIO_DESCRIPCION2" class="DESCRIPCION">
+        Hemos concluido con el análisis, este es el horario más adecuado para tus cursos.
+      </label>
+      <div id="HORARIO_DIV"></div>
+    </div>
+  </div>
+
+  <script src="js/animacion_y_navegacion.js"></script>
+  <script src="js/horario.js"></script>
 </body>
 </html>
