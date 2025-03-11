@@ -887,6 +887,7 @@ member(X, [_|T]) :- member(X, T).
 % Reglas para horario óptimo
 % -----------------------------------------
 % overlap(Ini1, Fin1, Ini2, Fin2) es verdadero si los intervalos se traslapan.
+
 overlap(Ini1, Fin1, Ini2, Fin2) :-
     Ini1 < Fin2,
     Ini2 < Fin1.
